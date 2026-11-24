@@ -683,6 +683,59 @@ dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px
 .tpacts .sp{flex:1}
 .tpok{height:42px}
 
+/* soft events + vertical labels */
+.bgev{border:2px dashed color-mix(in srgb,var(--c) 55%,var(--surface));background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--c) 20%,var(--surface)) 0 8px,color-mix(in srgb,var(--c) 9%,var(--surface)) 8px 16px)}
+.evbox{border:2px dashed color-mix(in srgb,var(--c) 55%,var(--surface));background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--c) 18%,var(--surface)) 0 10px,color-mix(in srgb,var(--c) 8%,var(--surface)) 10px 20px)}
+.bgev.vert .bglbl{position:absolute;left:1px;top:6px;bottom:6px;width:24px;padding:0;display:flex;align-items:flex-start;justify-content:center}
+.bgev.vert .bglbl b{writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;max-height:100%;overflow:hidden;text-overflow:ellipsis;padding:6px 0;line-height:20px;font-size:17px}
+.wg-dayv .bgev.vert .bglbl b{font-size:19px}
+.bgev.vert .bglinks{padding:6px 6px 0 28px}
+
+/* events: variant 4 (almost transparent) */
+.bgev{border:2px dashed color-mix(in srgb,var(--c) 60%,var(--surface));background:color-mix(in srgb,var(--c) 8%,var(--surface))}
+.evbox{border:2px dashed color-mix(in srgb,var(--c) 60%,var(--surface));background:color-mix(in srgb,var(--c) 8%,var(--surface))}
+.pill.evpill,.mp.evpill{background:color-mix(in srgb,var(--c) 14%,var(--surface));border:1.5px dashed color-mix(in srgb,var(--c) 70%,var(--surface));box-shadow:none}
+/* done = lighter, not darker */
+.card.done,.ev.done,.mp.done,.pill.done,.pillw.done .pill{filter:none!important;opacity:1}
+.card.done::after,.ev.done::after{content:"";position:absolute;inset:0;border-radius:inherit;background:rgba(255,253,248,.62);pointer-events:none}
+.card.done .chk{position:relative;z-index:2}
+.ev.done .evchk{z-index:2}
+.card.done .subs{z-index:2}
+.card.done .main,.card.done .tabl{opacity:1}
+.mp.done,.pill.done{background:color-mix(in srgb,var(--c) 35%,#FFFDF8)}
+/* subtasks */
+.card{flex-wrap:wrap}
+.card .subs{flex-basis:100%;display:flex;flex-direction:column;gap:4px;margin:6px 0 0 40px;padding:6px 10px;background:var(--plate,rgba(255,253,248,.94));border-radius:12px;position:relative;z-index:2}
+.subl{display:flex;align-items:center;gap:8px;font-size:14px;color:#2A1E1A;min-width:0}
+.subl span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.subl.done span{text-decoration:line-through;opacity:.55}
+.subck{flex:none;width:18px;height:18px;border-radius:5px;border:1.8px solid #2A1E1A;background:#FFFDF8;display:grid;place-items:center;padding:0;color:#2A1E1A}
+.subck svg{width:11px;height:11px;opacity:0}
+.subl.done .subck svg,.subck.on svg{opacity:1}
+.evsubs{position:absolute;left:8px;right:8px;top:30px;display:flex;flex-direction:column;gap:3px;z-index:2;background:var(--plate,rgba(255,253,248,.94));border-radius:8px;padding:4px 6px}
+.evsubs .subl{font-size:12px}
+.evsubs .subck{width:15px;height:15px}
+.ev .evmain .sc{font-size:11px;font-weight:700}
+.sublist{display:flex;flex-direction:column;gap:6px}
+.subed{display:flex;align-items:center;gap:8px}
+.subed input{flex:1;min-width:0;height:40px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);padding:0 12px;color:var(--ink);font-size:15px}
+.subed.done input{text-decoration:line-through;opacity:.6}
+.subed .subck{width:24px;height:24px;border-color:var(--stroke)}
+.subdel{flex:none;width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--muted);font-size:20px}
+.subadd{display:flex;gap:8px}
+.subadd input{flex:1;min-width:0;height:44px;border-radius:14px;border:1.5px dashed var(--dash);background:var(--surface);padding:0 12px;color:var(--ink);font-size:15px}
+.subadd .b{height:44px}
+.grp[hidden]{display:none}
+/* event list grouped by day */
+.evlist{flex-basis:100%;display:flex;flex-direction:column;gap:6px;background:var(--bg);border-radius:16px;padding:10px;margin-top:4px;max-height:300px;overflow:auto}
+.evday{font-family:Caveat,cursive;font-weight:700;font-size:19px;color:var(--muted);margin-top:4px}
+.evopt{display:flex;align-items:center;gap:10px;border:1.5px dashed color-mix(in srgb,var(--c) 70%,var(--surface));background:color-mix(in srgb,var(--c) 10%,var(--surface));border-radius:12px;padding:8px 12px;text-align:left;color:var(--ink)}
+.evopt[aria-pressed="true"]{border-style:solid;border-color:var(--stroke)}
+.evopt .evdot{width:10px;height:10px;border-radius:50%;background:var(--c);flex:none}
+.evopt b{font-weight:600;flex:1}
+.evopt small{color:var(--muted);font-size:13px}
+.chip.evchip{background:color-mix(in srgb,var(--c) 14%,var(--surface));box-shadow:inset 3px 0 0 var(--c)}
+
 .login{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:24px;background:var(--head)}
 .login[hidden]{display:none}
 .login-card{background:var(--surface);border-radius:28px;padding:32px 26px;max-width:380px;width:100%;text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center;box-shadow:0 10px 40px rgba(20,30,60,.15)}
@@ -791,6 +844,10 @@ dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px
         <div class="cbhead"><button type="button" class="round sm" id="dpPrev" aria-label="Предыдущий месяц"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg></button><span id="dpTitle"></span><button type="button" class="round sm" id="dpNext" aria-label="Следующий месяц"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l5 5-5 5"/></svg></button></div>
         <div class="cbgrid" id="dpGrid"></div>
       </div></div>
+    </div>
+    <div class="grp" id="subGrp"><span class="glbl">Подзадачи</span>
+      <div class="sublist" id="fSubs"></div>
+      <div class="subadd"><input type="text" id="fSubNew" placeholder="Добавить подзадачу" maxlength="160" aria-label="Новая подзадача"><button type="button" class="b" id="fSubAdd">Добавить</button></div>
     </div>
     <div class="grp" id="evLinkGrp" hidden><span class="glbl">К событию</span>
       <div class="chips" id="fEvLink" role="group" aria-label="Привязать к событию"></div>
@@ -1087,6 +1144,27 @@ dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px
     }
     return false;
   }
+  // подзадачи: у разовых задач done хранится в самой подзадаче, у повторов — по датам
+  function subsOf(t){
+    const b = find(t.id) || t; const list = b.subs || [];
+    if (b.rep) { const d = (b.subsDone || {})[t.date] || []; return list.map(x => ({ ...x, done: d.includes(x.id) })); }
+    return list;
+  }
+  function toggleSub(t, sid){
+    const b = find(t.id); if (!b) return;
+    if (b.rep) { b.subsDone = b.subsDone || {}; const d = b.subsDone[t.date] || []; b.subsDone[t.date] = d.includes(sid) ? d.filter(x => x !== sid) : d.concat(sid); }
+    else { const x = (b.subs || []).find(x => x.id === sid); if (x) x.done = !x.done; }
+    scheduleSave(); render();
+  }
+  function subLine(t, x){
+    const row = el("div", { class: "subl" + (x.done ? " done" : "") });
+    const ck = el("button", { class: "subck", "aria-label": (x.done ? "Вернуть: " : "Сделано: ") + x.text, onclick: e => { e.stopPropagation(); toggleSub(t, x.id); } });
+    ck.append(svg(ICON_CHECK));
+    row.append(ck, el("span", { text: x.text }));
+    return row;
+  }
+  const subCount = t => { const l = subsOf(t); return l.length ? l.filter(x => x.done).length + "/" + l.length : ""; };
+
   function itemsOn(k){
     const out = [];
     state.tasks.forEach(t => {
@@ -1099,7 +1177,7 @@ dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px
     if (t._occ) { const b = find(t.id); b.doneOn = b.doneOn || []; b.doneOn = t.done ? b.doneOn.filter(x => x !== t.date) : b.doneOn.concat(t.date); scheduleSave(); render(); }
     else update(t.id, { done: !t.done });
   }
-  const plain = t => ({ text: t.text, time: t.time || "", end: t.end || "", cat: t.cat, kind: t.kind || "task", evId: t.evId || null, evDate: t.evDate || null });
+  const plain = t => ({ text: t.text, time: t.time || "", end: t.end || "", cat: t.cat, kind: t.kind || "task", evId: t.evId || null, evDate: t.evDate || null, subs: (t.subs || []).map(x => ({ id: uid(), text: x.text, done: false })) });
   function detach(base, k, patch){
     base.skip = (base.skip || []).concat(k);
     const n = { id: uid(), created: Date.now(), done: (base.doneOn || []).includes(k), ...plain(base), date: k, ...patch };
@@ -1120,7 +1198,20 @@ dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px
   const durLbl = m => m < 60 ? m + " мин" : m % 60 === 0 ? (m / 60) + " ч" : m % 60 === 30 ? Math.floor(m / 60) + ",5 ч" : Math.floor(m / 60) + " ч " + (m % 60) + " мин";
   const DURS = { task: [15, 30, 60, 90, 120], event: [60, 120, 240, 480, 540] };
   let editing = null, editOcc = null, fCat = "work", fKind = "task", fDate = null, fStart = "", fDur = 60, fEnd = "";
-  let editItem = null, fEv = null, fEvDate = null;
+  let editItem = null, fEv = null, fEvDate = null, fSubs = [], evListOpen = false;
+  function renderSubsEd(){
+    $("subGrp").hidden = fKind !== "task";
+    const box = $("fSubs"); box.innerHTML = "";
+    fSubs.forEach((x, i) => {
+      const ck = el("button", { type: "button", class: "subck" + (x.done ? " on" : ""), "aria-label": x.done ? "Вернуть" : "Сделано", onclick: () => { x.done = !x.done; renderSubsEd(); } }); ck.append(svg(ICON_CHECK));
+      const inp = el("input", { type: "text", value: x.text, maxlength: "160", "aria-label": "Подзадача" }); inp.oninput = () => x.text = inp.value;
+      const del = el("button", { type: "button", class: "subdel", "aria-label": "Удалить подзадачу", text: "×", onclick: () => { fSubs.splice(i, 1); renderSubsEd(); } });
+      box.append(el("div", { class: "subed" + (x.done ? " done" : "") }, ck, inp, del));
+    });
+  }
+  const addSub = () => { const v = $("fSubNew").value.trim(); if (!v) return; fSubs.push({ id: uid(), text: v, done: false }); $("fSubNew").value = ""; renderSubsEd(); $("fSubNew").focus(); };
+  $("fSubAdd").onclick = addSub;
+  $("fSubNew").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); addSub(); } });
   function evOptions(){
     // события в выбранный день и в ближайшие 30 дней; у повторов — только ближайший раз
     const from = fDate || todayKey();
@@ -1137,20 +1228,32 @@ dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px
   function renderEvLink(){
     const g = $("evLinkGrp"), box = $("fEvLink");
     const opts = fKind === "task" ? evOptions() : [];
-    g.hidden = !opts.length; box.innerHTML = "";
-    if (!opts.length) { fEv = null; fEvDate = null; return; }
+    g.hidden = !opts.length && !fEv; box.innerHTML = "";
+    if (g.hidden) { fEv = null; fEvDate = null; return; }
     const none = el("button", { type: "button", class: "chip plain", "aria-pressed": String(!fEv), text: "Без события" });
-    none.onclick = () => { fEv = null; fEvDate = null; renderEvLink(); };
-    box.append(none);
-    opts.forEach(({ e, k }) => {
-      const c = catOf(e.cat), d = parse(k);
-      const sameDay = k === fDate;
-      const when = (sameDay ? "" : DW[(d.getDay() + 6) % 7].toLowerCase() + " " + d.getDate() + " " + MS[d.getMonth()] + (e.time ? ", " : "")) + (e.time ? timeLabel(e) : (sameDay ? "весь день" : ""));
-      const b = el("button", { type: "button", class: "chip evchip", "aria-pressed": String(fEv === e.id && (!fEvDate || fEvDate === k)) }, el("span", { text: e.text }), when ? el("small", { text: " " + when }) : null);
-      b.style.setProperty("--c", c.c); b.style.setProperty("--pat", c.pat || c.c); b.style.setProperty("--plate", c.plate || "transparent"); b.style.setProperty("--fg", c.fg);
-      b.onclick = () => { fEv = e.id; fEvDate = k; if (!editing) { fCat = e.cat; renderChips(); } renderEvLink(); };
-      box.append(b);
-    });
+    none.onclick = () => { fEv = null; fEvDate = null; evListOpen = false; renderEvLink(); };
+    const cur = fEv ? (opts.find(o => o.e.id === fEv && (!fEvDate || o.k === fEvDate)) || { e: find(fEv) || { text: "событие", cat: "home" }, k: fEvDate }) : null;
+    const curLbl = cur ? (() => { const d = cur.k ? parse(cur.k) : null; return "К событию: " + cur.e.text + (d && cur.k !== fDate ? ", " + DW[(d.getDay() + 6) % 7].toLowerCase() + " " + d.getDate() + " " + MS[d.getMonth()] : ""); })() : "К событию…";
+    const pick = el("button", { type: "button", class: "chip " + (cur ? "evchip" : "plain"), "aria-pressed": String(!!fEv), "aria-expanded": String(evListOpen), text: curLbl });
+    if (cur) { const c = catOf(cur.e.cat); pick.style.setProperty("--c", c.c); }
+    pick.onclick = () => { evListOpen = !evListOpen; renderEvLink(); };
+    box.append(none, pick);
+    if (evListOpen) {
+      const list = el("div", { class: "evlist" });
+      const byDay = new Map(); opts.forEach(o => { if (!byDay.has(o.k)) byDay.set(o.k, []); byDay.get(o.k).push(o); });
+      [...byDay.keys()].sort().forEach(k => {
+        list.append(el("div", { class: "evday", text: k === todayKey() ? "Сегодня, " + dayTitle(k).split(", ").slice(1).join(", ") : dayTitle(k) }));
+        byDay.get(k).forEach(({ e }) => {
+          const c = catOf(e.cat);
+          const b = el("button", { type: "button", class: "evopt", "aria-pressed": String(fEv === e.id && (!fEvDate || fEvDate === k)) }, el("span", { class: "evdot" }), el("b", { text: e.text }), el("small", { text: e.time ? timeLabel(e) : "весь день" }));
+          b.style.setProperty("--c", c.c);
+          b.onclick = () => { fEv = e.id; fEvDate = k; evListOpen = false; if (!editing) { fCat = e.cat; renderChips(); } renderEvLink(); };
+          list.append(b);
+        });
+      });
+      if (!opts.length) list.append(el("div", { class: "evday", text: "Ближайших событий нет" }));
+      box.append(list);
+    }
     $("evLinkHint").hidden = !fEv || !!fStart || fEvDate !== fDate;
   }
   let fRep = { type: "none", days: [], until: null }, fScope = "one", cbStart = null, cbSel = new Set();
@@ -1222,7 +1325,7 @@ dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px
   };
   function formData(){
     const end = computedEnd();
-    return { text: $("fText").value.trim(), time: fStart || "", end: fStart ? end : "", cat: fCat, kind: fKind, evId: fKind === "task" ? fEv : null, evDate: fKind === "task" && fEv ? fEvDate : null };
+    return { text: $("fText").value.trim(), time: fStart || "", end: fStart ? end : "", cat: fCat, kind: fKind, evId: fKind === "task" ? fEv : null, evDate: fKind === "task" && fEv ? fEvDate : null, subs: fKind === "task" ? fSubs.filter(x => x.text.trim()).map(x => ({ id: uid(), text: x.text.trim(), done: false })) : [] };
   }
   $("cbGo").onclick = () => {
     const d = formData(); if (!d.text) { $("fErr").textContent = "Сначала дай название."; return; }
@@ -1258,7 +1361,7 @@ dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px
   document.querySelectorAll(".seg button").forEach(b => b.onclick = () => {
     fKind = b.dataset.kind;
     fDur = fKind === "event" ? 540 : 60; closePicker("fEndPick");
-    renderKind(); renderTime(); renderEvLink();
+    renderKind(); renderTime(); renderEvLink(); renderSubsEd();
   });
 
   function dateChip(label, val, extra){
@@ -1421,7 +1524,8 @@ dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px
     fCat = t ? t.cat : (preset.cat || fCat);
     fEv = t ? (t.evId || null) : (preset.evId || null);
     fEvDate = t ? (t.evDate || (t.evId ? t.date : null)) : (preset.evDate || (preset.evId ? preset.date : null));
-    renderKind(); renderDates(); renderTime(); renderChips(); renderRep(); renderScope(); renderEvLink();
+    fSubs = t ? subsOf(t).map(x => ({ ...x })) : []; $("fSubNew").value = ""; evListOpen = false;
+    renderKind(); renderDates(); renderTime(); renderChips(); renderRep(); renderScope(); renderEvLink(); renderSubsEd();
     dlg.showModal();
     setTimeout(() => $("fText").focus(), 30);
   }
@@ -1435,21 +1539,25 @@ dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px
     if (fStart && end && mins(end) <= mins(fStart)) { err.textContent = "Конец должен быть позже начала."; return; }
     if ((fRep.type === "weekly" || fRep.type === "biweekly") && !fRep.days.length) { err.textContent = "Отметь хотя бы один день недели."; return; }
     const rep = fDate && fRep.type !== "none" ? { type: fRep.type, days: fRep.days.slice(), until: fRep.until } : null;
+    const subsClean = fKind === "task" ? fSubs.filter(x => x.text.trim()).map(x => ({ id: x.id, text: x.text.trim(), done: !!x.done })) : [];
+    d.subs = subsClean.map(x => rep ? { id: x.id, text: x.text } : x);
     const base = editing && find(editing);
+    const markOcc = (b, k) => { if (!b.rep || !k) return; b.subsDone = b.subsDone || {}; b.subsDone[k] = subsClean.filter(x => x.done).map(x => x.id); };
     if (!base) {
-      state.tasks.push({ id: uid(), done: false, created: Date.now(), ...d, date: fDate, rep, doneOn: [], skip: [] });
+      const nt = { id: uid(), done: false, created: Date.now(), ...d, date: fDate, rep, doneOn: [], skip: [] };
+      if (rep) { nt.subsDone = {}; } state.tasks.push(nt);
     } else if (base.rep && editOcc) {
-      if (fScope === "one") detach(base, editOcc, { ...d, date: fDate });
+      if (fScope === "one") detach(base, editOcc, { ...d, date: fDate, subs: subsClean });
       else if (fScope === "future" && editOcc > base.date) {
         base.rep.until = key(addDays(parse(editOcc), -1));
         state.tasks.push({ id: uid(), done: false, created: Date.now(), ...d, date: fDate || editOcc, rep, doneOn: [], skip: [] });
       } else {
         Object.assign(base, d, { rep });
-        if (!rep) base.date = fDate;
+        if (!rep) { base.date = fDate; base.subs = subsClean; } else markOcc(base, editOcc);
       }
     } else {
       Object.assign(base, d, { date: fDate, rep });
-      if (rep) { base.doneOn = base.doneOn || []; base.skip = base.skip || []; }
+      if (rep) { base.doneOn = base.doneOn || []; base.skip = base.skip || []; } else base.subs = subsClean;
     }
     scheduleSave(); dlg.close(); render();
   };
@@ -1500,6 +1608,11 @@ dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px
       const mv = el("button", { class: "more", title: label, "aria-label": label, onclick: () => moveNext(t) });
       mv.append(svg(ICON_NEXT));
       c.append(mv);
+    }
+    const subs = isTask(t) ? subsOf(t) : [];
+    if (subs.length) {
+      main.querySelector(".sub").append(document.createTextNode(", подзадачи " + subCount(t)));
+      c.append(el("div", { class: "subs" }, subs.map(x => subLine(t, x))));
     }
     return c;
   }
@@ -1638,10 +1751,11 @@ dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px
       openDialog(null, { date: k, start: f(m), end: f(Math.min(m + 60, 23 * 60 + 59)) });
     };
     const bgs = byDay[k].filter(t => t.time && isEv(t));
-    const headH = e => EVHEAD + linkedTo(e, items).length * 24;
+    const isVert = e => { const s0 = mins(e.time), e0 = Math.max(mins(e.end) ?? s0 + 60, s0 + 20), hp = (e0 - s0) / 60 * H; return hp >= Math.max(84, e.text.length * 9 + 24); };
+    const headH = e => isVert(e) ? (linkedTo(e, items).length ? 6 + linkedTo(e, items).length * 24 : 4) : EVHEAD + linkedTo(e, items).length * 24;
     bgs.forEach(t => {
       const c = catOf(t.cat), s0 = mins(t.time), e0 = Math.max(mins(t.end) ?? s0 + 60, s0 + 20);
-      const b = el("div", { class: "bgev", style: "top:" + ((s0 - minH * 60) / 60 * H) + "px;height:" + ((e0 - s0) / 60 * H - 2) + "px" },
+      const b = el("div", { class: "bgev" + (isVert(t) ? " vert" : ""), style: "top:" + ((s0 - minH * 60) / 60 * H) + "px;height:" + ((e0 - s0) / 60 * H - 2) + "px" },
         el("button", { class: "bglbl", title: t.text + ", " + timeLabel(t), "aria-label": "Событие: " + t.text + ", " + timeLabel(t), onclick: () => openDialog(t) }, el("b", { text: t.text })));
       const links = linkedTo(t, items).sort(sortT);
       if (links.length) {
@@ -1682,10 +1796,14 @@ dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px
       const c = catOf(t.cat);
       const rowMode = dayMode && hgt < 58;
       const showTime = hgt >= 58 || rowMode, lines = rowMode ? 2 : Math.max(1, Math.floor((hgt - 10 - (showTime ? 15 : 0)) / 14.5));
-      const pos = (() => { const off = inEv(s) ? 6 : 2; return "top:" + top + "px;height:" + hgt + "px;left:calc(" + (lane / lanes * 100) + "% + " + off + "px);width:calc(" + (100 / lanes) + "% - " + (off + 2) + "px)"; })();
+      const pos = (() => { const host = bgs.find(e => s >= mins(e.time) && s < (mins(e.end) ?? mins(e.time) + 60)); const off = host ? (isVert(host) ? 28 : 6) : 2; return "top:" + top + "px;height:" + hgt + "px;left:calc(" + (lane / lanes * 100) + "% + " + off + "px);width:calc(" + (100 / lanes) + "% - " + (off + 2) + "px)"; })();
+      const sc = subCount(t), subs = subsOf(t);
+      const tlabel = timeLabel(t) + (sc ? ", ☑ " + sc : "");
+      const fitSubs = dayMode && subs.length && hgt >= 76 + subs.length * 22;
       const b = el("div", { class: "ev" + (t.done ? " done" : ""), style: pos },
         el("button", { class: "evmain" + (rowMode ? " row" : ""), title: t.text + ", " + timeLabel(t), "aria-label": "Изменить: " + t.text + ", " + timeLabel(t), onclick: () => openDialog(t) },
-          rowMode ? el("span", { class: "evt", text: timeLabel(t) }) : null, el("b", { text: t.text, style: "-webkit-line-clamp:" + lines }), showTime && !rowMode ? el("span", { text: timeLabel(t) }) : null));
+          rowMode ? el("span", { class: "evt", text: tlabel }) : null, el("b", { text: t.text, style: "-webkit-line-clamp:" + (fitSubs ? 1 : lines) }), showTime && !rowMode ? el("span", { text: tlabel }) : (!showTime && sc ? el("span", { class: "sc", text: "☑ " + sc }) : null)));
+      if (fitSubs) b.append(el("div", { class: "evsubs", style: "top:" + (showTime && !rowMode ? 50 : 30) + "px" }, subs.map(x => subLine(t, x))));
       const ck = el("button", { class: "evchk", "aria-label": (t.done ? "Вернуть в работу: " : "Выполнено: ") + t.text, title: t.done ? "Вернуть в работу" : "Отметить выполненной", onclick: () => toggleDone(t) });
       ck.append(svg(ICON_CHECK)); b.append(ck);
       b.style.setProperty("--c", c.c); b.style.setProperty("--pat", c.pat || c.c); b.style.setProperty("--plate", c.plate || "transparent"); b.style.setProperty("--fg", c.fg);
@@ -1727,7 +1845,7 @@ dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px
       loose.sort((a, b) => isEv(b) - isEv(a));
       loose.slice(0, 2).forEach(t => {
         const c = catOf(t.cat);
-        const p = el("button", { class: "pill" + (isEv(t) ? " evpill" : "") + (t.done ? " done" : ""), text: t.text, title: t.text, onclick: () => openDialog(t) });
+        const p = el("button", { class: "pill" + (isEv(t) ? " evpill" : "") + (t.done ? " done" : ""), text: t.text + (isTask(t) && subCount(t) ? " ☑" + subCount(t) : ""), title: t.text, onclick: () => openDialog(t) });
         const w = el("div", { class: "pillw" + (isEv(t) ? "" : " has-chk") + (t.done ? " done" : "") }, p);
         if (!isEv(t)) { const ck = el("button", { class: "pchk", "aria-label": (t.done ? "Вернуть в работу: " : "Выполнено: ") + t.text, title: t.done ? "Вернуть в работу" : "Отметить выполненной", onclick: () => toggleDone(t) }); ck.append(svg(ICON_CHECK)); w.append(ck); }
         w.style.setProperty("--c", c.c); w.style.setProperty("--pat", c.pat || c.c); w.style.setProperty("--plate", c.plate || "transparent"); w.style.setProperty("--fg", c.fg);
@@ -1767,7 +1885,7 @@ dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px
       items.slice(0, 3).forEach(t => {
         const c = catOf(t.cat);
         const p = el("button", { class: "mp" + (isEv(t) ? " evpill" : "") + (t.done ? " done" : ""), title: (t.time ? t.time + " " : "") + t.text, "aria-label": (t.time ? t.time + ", " : "") + t.text, onclick: () => openDialog(t) },
-          t.time && !isEv(t) ? el("span", { class: "mt", text: t.time }) : null, el("span", { class: "mx", text: t.text }));
+          t.time && !isEv(t) ? el("span", { class: "mt", text: t.time }) : null, el("span", { class: "mx", text: t.text + (isTask(t) && subCount(t) ? " ☑" + subCount(t) : "") }));
         const w = el("div", { class: "pillw" + (isEv(t) ? "" : " has-chk") + (t.done ? " done" : "") }, p);
         if (!isEv(t)) { const ck = el("button", { class: "pchk", "aria-label": (t.done ? "Вернуть в работу: " : "Выполнено: ") + t.text, title: t.done ? "Вернуть в работу" : "Отметить выполненной", onclick: () => toggleDone(t) }); ck.append(svg(ICON_CHECK)); w.append(ck); }
         w.style.setProperty("--c", c.c); w.style.setProperty("--pat", c.pat || c.c); w.style.setProperty("--plate", c.plate || "transparent"); w.style.setProperty("--fg", c.fg);
