@@ -14,7 +14,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700;800&family=Rubik+Bubbles&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#EEF5FB; --surface:#FFFFFF; --raised:#E3EDF7; --ink:#1F2A44; --muted:#56637E; --line:#D9E5F1; --dash:#AFC4DC;
@@ -256,7 +256,7 @@ dialog{max-height:92vh;overflow:auto}
 .chip.pick input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer;border:none;padding:0}
 .trow{display:flex;align-items:center;gap:12px}
 .tbtn{height:52px;min-width:120px;padding:0 16px;border-radius:16px;border:2px solid var(--line);background:var(--bg);font-size:24px;font-weight:700;display:inline-flex;align-items:center;justify-content:space-between;gap:10px;font-variant-numeric:tabular-nums;color:var(--ink)}
-.tbtn.empty{font-size:16px;font-weight:600;color:var(--muted)}
+.tbtn.notime{font-size:16px;font-weight:600;color:var(--muted);white-space:nowrap}
 .tbtn[aria-expanded="true"]{border-color:var(--ring)}
 .tend{font-size:15px;color:var(--muted);font-weight:500}
 .picker{background:var(--bg);border-radius:18px;padding:10px;display:flex;flex-direction:column;gap:8px}
@@ -424,6 +424,265 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
 #dataText{width:100%;min-height:160px;border-radius:14px;border:1.5px solid var(--dash);background:var(--bg);color:var(--ink);padding:12px;font:12px/1.4 ui-monospace,Menlo,monospace;resize:vertical}
 .b.datebtn{margin:26px auto 0;display:block}
 
+.bgev{display:flex;flex-direction:column;align-items:stretch;gap:3px;padding:0;cursor:default}
+.bgev .bglbl{border:none;background:none;color:inherit;text-align:left;padding:3px 6px 0 8px;cursor:pointer;min-width:0;display:flex}
+.bgev .bglbl b{font-size:11px;font-weight:700;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;line-height:14px}
+.wg-dayv .bgev .bglbl b{font-size:12px}
+.bglinks{display:flex;flex-direction:column;gap:3px;padding:0 6px 0 8px}
+.bglinks .pill{width:100%;font-size:11px;height:21px;text-align:left}
+.wg-dayv .bglinks .pill{font-size:12px}
+.chip.evchip{opacity:1;background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--c) 45%,var(--surface)) 0 8px,color-mix(in srgb,var(--c) 25%,var(--surface)) 8px 16px);color:var(--ink);box-shadow:inset 3px 0 0 var(--c)}
+.chip.evchip[aria-pressed="true"]{border-color:var(--ink)}
+.chip.evchip small{font-weight:500;opacity:.7}
+.chip.evchip{height:auto;min-height:38px;padding:7px 14px;text-align:left;line-height:1.25;max-width:100%}
+.tbtn{white-space:nowrap;width:auto}
+.tbtn span{white-space:nowrap;flex:none}
+
+/* ===== painted theme ===== */
+:root{
+  --bg:#FBF1DF; --surface:#FFF9EE; --raised:#F3E6D0; --ink:#2A1E1A; --muted:#7A5E52; --line:#E8D8C2; --dash:#C9B49B;
+  --stroke:#2A1E1A;
+  --head:#D9CCF6; --head-ink:#2A1E1A; --head-muted:#6A4E7A; --head-chip:#FFF9EE;
+  --blue:#9DB9F2; --yellow:#F7CF58; --pink:#F49AB2; --mint:#9BD49B; --on-accent:#2A1E1A;
+  --pat-blue:repeating-conic-gradient(#BDD0F7 0 25%,#E6EEFC 0 50%) 0 0/18px 18px;
+  --pat-yellow:#F7CF58;
+  --pat-pink:repeating-linear-gradient(90deg,#F6A9BE 0 12px,#F9C9D5 12px 24px);
+  --pat-mint:#A3D8A0;
+  --ring:#E8566B; --btn:#2A1E1A; --on-btn:#FFF9EE; --fab:#4F9E5A; --on-fab:#FFFFFF;
+  --glass:rgba(255,249,238,.92);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1C1724; --surface:#2A2335; --raised:#362D44; --ink:#F7EEDD; --muted:#C2B3C9; --line:#3D3350; --dash:#5C4E70;
+  --stroke:#0B0810; --head:#3B3159; --head-ink:#F7EEDD; --head-muted:#D6C8EA; --head-chip:#2A2335;
+  --btn:#F7EEDD; --on-btn:#1C1724; --glass:rgba(42,35,53,.94); --ring:#E8566B;
+}}
+:root[data-theme="dark"]{
+  --bg:#1C1724; --surface:#2A2335; --raised:#362D44; --ink:#F7EEDD; --muted:#C2B3C9; --line:#3D3350; --dash:#5C4E70;
+  --stroke:#0B0810; --head:#3B3159; --head-ink:#F7EEDD; --head-muted:#D6C8EA; --head-chip:#2A2335;
+  --btn:#F7EEDD; --on-btn:#1C1724; --glass:rgba(42,35,53,.94); --ring:#E8566B;
+}
+:root[data-bg="paper"] body{background-color:var(--bg);background-image:radial-gradient(rgba(122,94,82,.10) 1px,transparent 1.2px),radial-gradient(rgba(122,94,82,.07) 1px,transparent 1.2px);background-size:7px 7px,11px 11px;background-position:0 0,3px 5px}
+.bgopt[data-bg="paper"] i{background-color:#FBF1DF;background-image:radial-gradient(rgba(122,94,82,.18) 1px,transparent 1.2px);background-size:7px 7px}
+
+/* header */
+.head{border-bottom:none}
+.inner{position:relative}
+.top{align-items:center;gap:10px}
+.top .sp{flex:1}
+.top .wd{font-family:Caveat,cursive;font-weight:700;font-size:24px;color:var(--ring);line-height:1}
+.when{display:flex;align-items:flex-end;gap:6px;margin-top:4px;min-width:0}
+.when h1{flex:1;min-width:0;margin:0;font-family:"Rubik Bubbles",Geologica,sans-serif;font-weight:400;line-height:1.05;letter-spacing:.01em;white-space:nowrap;-webkit-text-stroke:1px var(--stroke);paint-order:stroke fill}
+.when h1 .lc0{color:#E8566B}.when h1 .lc1{color:#5B86E5}.when h1 .lc2{color:#F2A922}.when h1 .lc3{color:#3E9E5C}.when h1 .lc4{color:#E86FA0}
+.hdeco{flex:none;width:72px;height:92px;margin-bottom:-6px}
+.hcat-d{display:none;flex:none;width:150px;height:86px;margin-bottom:-4px}
+.hcat{position:absolute;right:14px;bottom:4px;width:104px;height:60px;z-index:2;pointer-events:none}
+.hstar{position:absolute;width:22px;height:22px;pointer-events:none}
+.hstar.s1{left:58%;top:16px;color:#F2A922}
+.hstar.s2{left:calc(58% + 34px);top:34px;width:18px;height:16px;color:#E8566B}
+@media (min-width:760px){.hcat{display:none}.hcat-d{display:block}}
+.round{background:var(--surface);border:2px solid var(--stroke);box-shadow:2px 3px 0 var(--stroke);color:var(--ink)}
+.round svg{stroke:var(--ink)}
+.round.acct{background:var(--surface)}
+.tabs{background:none;padding:0;gap:6px;flex-wrap:wrap}
+.tab{border:2px solid var(--stroke);background:var(--surface);color:var(--ink);height:38px;padding:0 13px;font-weight:600}
+.tab[aria-selected="true"]{background:var(--btn);color:var(--on-btn);box-shadow:none}
+.todaylink{background:var(--surface);border:2px solid var(--stroke);color:var(--ink)}
+.nav .round{box-shadow:none}
+
+/* strip */
+.sd{background:var(--surface);border:2px solid var(--stroke);box-shadow:2px 3px 0 var(--stroke);border-radius:16px}
+.sd .a{font-family:Caveat,cursive;font-size:17px;font-weight:700;color:var(--muted);line-height:1}
+.sd:nth-child(6) .a,.sd:nth-child(7) .a{color:var(--ring)}
+.sd[aria-pressed="true"]{background:var(--ring);color:#fff;border-color:var(--stroke)}
+.sd[aria-pressed="true"] .a,.sd[aria-pressed="true"] .n{color:#fff}
+.sd.today .n{color:var(--ring)}
+.sd[aria-pressed="true"].today .n{color:#fff}
+.sd.has .d{background:var(--ring)}
+.sd[aria-pressed="true"].has .d{background:#fff}
+
+.section-title{font-family:Caveat,cursive;font-size:24px;font-weight:700;color:var(--ink)}
+.wg-tip,.zoombar .wg-tip{font-family:Caveat,cursive;font-size:19px;font-weight:600;color:var(--muted)}
+.zseg{background:var(--surface);border:2px solid var(--stroke);box-shadow:2px 3px 0 var(--stroke)}
+.pasttoggle{border-color:var(--dash);background:var(--surface)}
+
+/* cards */
+.card{background:var(--pat,var(--c));border:2px solid var(--stroke);box-shadow:3px 4px 0 var(--stroke);border-radius:18px}
+.card.outline{background:var(--pat,var(--c));color:var(--fg)}
+.card.has-tab{border-top-left-radius:0}
+.card .tabl{top:-25px;left:-2px;height:25px;border:2px solid var(--stroke);border-bottom:none;background:var(--c);font-family:Caveat,cursive;font-size:18px;font-weight:700}
+.card .chk{background:#FFF9EE;border-color:var(--stroke)}
+.card .main .ttl,.card .main .sub{background:none}
+.loose .card.has-tab{margin-top:28px}
+.tl .item{padding-top:26px}
+.free{border-color:var(--dash);background:var(--surface)}
+.empty{border-color:var(--dash);background:var(--surface)}
+
+/* grid */
+.wg,.mg{background:var(--surface);border:2px solid var(--stroke);box-shadow:4px 5px 0 var(--stroke);-webkit-backdrop-filter:none;backdrop-filter:none}
+.wg-times span{font-family:Caveat,cursive;font-size:16px;font-weight:700}
+.wg-head .h b{font-weight:700}
+.wg-head .h.today b{background:var(--ring)}
+.ev{background:var(--pat,var(--c));border:2px solid var(--stroke);box-shadow:2px 3px 0 var(--stroke);border-radius:12px}
+.ev .evchk{background:#FFF9EE;border-color:var(--stroke)}
+.ev .evmain.row .evt{color:#fff;text-shadow:0 1px 0 var(--stroke),0 0 3px rgba(0,0,0,.35)}
+.bgev{border:2px dashed color-mix(in srgb,var(--c) 85%,var(--stroke));box-shadow:none;background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--c) 34%,var(--surface)) 0 8px,color-mix(in srgb,var(--c) 20%,var(--surface)) 8px 16px)}
+.bgev .bglbl b{font-family:Caveat,cursive;font-size:17px;line-height:18px;opacity:1}
+.wg-dayv .bgev .bglbl b{font-size:19px}
+.pill{background:var(--c);border:1.5px solid var(--stroke)}
+.pill.evpill{border-style:dashed}
+.evbox{border:2px dashed color-mix(in srgb,var(--c) 85%,var(--stroke));background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--c) 30%,var(--surface)) 0 10px,color-mix(in srgb,var(--c) 18%,var(--surface)) 10px 20px)}
+.evhead b{font-family:Caveat,cursive;font-size:22px}
+
+/* month */
+.mc{background:var(--surface);border:1.5px solid var(--line)}
+.mc.today{background:#FFE7A8;border:2px solid var(--stroke)}
+.mc.today .mnum{background:var(--ring)}
+.mp{border:1px solid var(--stroke)}
+.mp.evpill{border-style:dashed}
+.mg-head span:nth-child(6),.mg-head span:nth-child(7){color:var(--ring)}
+
+/* buttons & dialogs */
+.fab{background:var(--fab);color:var(--on-fab);border:2.5px solid var(--stroke);box-shadow:3px 5px 0 var(--stroke)}
+.fab svg{stroke:var(--on-fab)}
+dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px 6px 0 var(--stroke)}
+.sheet h2{font-family:"Rubik Bubbles",Geologica,sans-serif;font-weight:400;font-size:28px;color:var(--ring)}
+.b{border:2px solid var(--stroke)}
+.b.primary{background:var(--btn);color:var(--on-btn)}
+.b.danger,.b.ghost{border-color:transparent}
+.chip.plain{border:2px solid var(--line)}
+.chip.plain[aria-pressed="true"]{border-color:var(--btn)}
+.chip{border-width:2px}
+.series{background:var(--pat,var(--c));border:2px solid var(--stroke);box-shadow:3px 4px 0 var(--stroke)}
+.datehead{font-family:Caveat,cursive;font-size:24px;border-bottom:2px dashed var(--dash)}
+.seg{border:2px solid var(--stroke);background:var(--raised)}
+.login{background:var(--head)}
+.login-card{border:2.5px solid var(--stroke);box-shadow:5px 6px 0 var(--stroke)}
+.login-card h1{font-family:"Rubik Bubbles",Geologica,sans-serif;font-weight:400;color:var(--ring)}
+
+/* work = peach, text plates on patterns */
+:root{--peach:#F6AE7B;--pat-peach:repeating-conic-gradient(#F8C29A 0 25%,#FDE3CF 0 50%) 0 0/18px 18px;--plate-bg:rgba(255,249,238,.94)}
+:root[data-season="winter"]{--plate-bg:rgba(255,253,248,.95)}
+.card .main{background:var(--plate,transparent);border-radius:12px;padding:5px 10px;margin:-2px 0}
+.ev .evmain b,.ev .evmain span{background:var(--plate,transparent);border-radius:6px;padding:0 4px;-webkit-box-decoration-break:clone;box-decoration-break:clone;align-self:flex-start;max-width:100%}
+.ev .evmain.row .evt{background:var(--plate,transparent);color:var(--ink);text-shadow:none}
+.series .sx{background:var(--plate,transparent);border-radius:12px;padding:6px 10px}
+.ghost .evmain b,.ghost .main{background:var(--plate,transparent)}
+.bgev .bglbl b{background:var(--plate-bg);border-radius:6px;padding:0 6px;color:#2A1E1A}
+.evhead{background:var(--plate-bg);border-radius:12px;color:#2A1E1A;margin:2px}
+.evhead .evtime,.evhead .evcat{color:#7A5E52}
+
+/* ===== brighter palette ===== */
+:root{
+  --bg:#FCF0DA; --surface:#FFF8EA;
+  --head:#B9A2F6; --head-muted:#5B3C8C;
+  --peach:#FF8F45; --pat-peach:repeating-conic-gradient(#FF9F5E 0 25%,#FFE0C6 0 50%) 0 0/18px 18px;
+  --yellow:#FFC93C; --pat-yellow:#FFC93C;
+  --pink:#FF6F9C; --pat-pink:repeating-linear-gradient(90deg,#FF6F9C 0 12px,#FFC0D3 12px 24px);
+  --mint:#4FC06A; --pat-mint:#5FC977;
+  --ring:#E8333F; --fab:#2FA84F;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--head:#4A3880;--bg:#1C1724;--surface:#2A2335}}
+:root[data-theme="dark"]{--head:#4A3880;--bg:#1C1724;--surface:#2A2335}
+.bgev{background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--c) 48%,var(--surface)) 0 8px,color-mix(in srgb,var(--c) 26%,var(--surface)) 8px 16px)}
+.evbox{background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--c) 44%,var(--surface)) 0 10px,color-mix(in srgb,var(--c) 24%,var(--surface)) 10px 20px)}
+.top .wd{color:#D81B60}
+.when h1 .lc0{color:#E8333F}.when h1 .lc1{color:#3F6FE0}.when h1 .lc2{color:#FFB020}.when h1 .lc3{color:#2FA84F}.when h1 .lc4{color:#FF4F8B}
+.mc.today{background:#FFD54F}
+.hflower{position:absolute;width:30px;height:30px;pointer-events:none}
+.hflower.f1{left:44%;top:56px;color:#FFF8EA}
+.hflower.f2{left:calc(44% + 46px);top:84px;width:22px;height:22px;color:#FF6F9C}
+.hstar.s3{left:8px;top:auto;bottom:34px;width:20px;height:20px;color:#FFC93C}
+@media (max-width:620px){.hflower.f1{left:50%;top:60px}.hflower.f2{left:calc(50% + 34px);top:92px}}
+
+/* ===== new year season ===== */
+.scarf{display:none}
+:root[data-season="winter"] .scarf{display:inline}
+:root[data-season="winter"]{
+  --bg:#F7F3EC; --surface:#FFFDF8; --raised:#EFE8DC;
+  --head:#D63441; --head-ink:#FFFDF8; --head-muted:#FFE3E3; --head-chip:#FFFDF8;
+  --peach:#D63441; --pat-peach:repeating-linear-gradient(135deg,#D63441 0 8px,#FFF4F0 8px 16px);
+  --yellow:#2F9A5E; --pat-yellow:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Crect width='26' height='26' fill='%232F9A5E'/%3E%3Cpath d='M7 3l1.5 3.5 3.8.3-2.9 2.5.9 3.7L7 11 3.7 13l.9-3.7L1.7 6.8l3.8-.3z' fill='%23E3F5EA'/%3E%3Cpath d='M19 14l1 2.4 2.6.2-2 1.7.6 2.5-2.2-1.4-2.2 1.4.6-2.5-2-1.7 2.6-.2z' fill='%23E3F5EA'/%3E%3C/svg%3E");
+  --pink:#F28A2E; --pat-pink:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Crect width='28' height='28' fill='%23F28A2E'/%3E%3Cg stroke='%23FFF7EC' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='M8 3v10M3 8h10M4.5 4.5l7 7M11.5 4.5l-7 7'/%3E%3Cpath d='M21 16v8M17 20h8M18 17l6 6M24 17l-6 6'/%3E%3C/g%3E%3C/svg%3E");
+  --mint:#3D6FD8; --pat-mint:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Crect width='28' height='28' fill='%233D6FD8'/%3E%3Cpath d='M7 3l5 8H9l4 6H1l4-6H2z' fill='%23DCE7FB'/%3E%3Cpath d='M21 15l4 6h-2l3 5h-10l3-5h-2z' fill='%23DCE7FB'/%3E%3C/svg%3E");
+  --ring:#D63441; --fab:#2F9A5E;
+}
+@media (prefers-color-scheme:dark){:root[data-season="winter"]:not([data-theme="light"]){--bg:#1D1A22;--surface:#2A2530;--raised:#363040;--head:#8E1F2C;--head-chip:#2A2530;--head-ink:#F7EEDD}}
+:root[data-season="winter"][data-theme="dark"]{--bg:#1D1A22;--surface:#2A2530;--raised:#363040;--head:#8E1F2C;--head-chip:#2A2530;--head-ink:#F7EEDD}
+:root[data-season="winter"][data-bg="paper"] body{background-image:radial-gradient(color-mix(in srgb,var(--ink) 14%,transparent) 1.4px,transparent 1.6px),radial-gradient(color-mix(in srgb,var(--ink) 9%,transparent) 1px,transparent 1.2px);background-size:22px 22px,13px 13px;background-position:0 0,7px 9px}
+:root[data-season="winter"] .head{box-shadow:inset 0 -14px 0 var(--surface)}
+:root[data-season="winter"] .head .wave path{fill:var(--surface)}
+:root[data-season="winter"] .top .wd{color:#FFE3E3}
+:root[data-season="winter"] .when h1{-webkit-text-stroke:1.5px #2A1E1A}
+:root[data-season="winter"] .when h1 .lc0{color:#FFFDF8}:root[data-season="winter"] .when h1 .lc1{color:#F2B33D}:root[data-season="winter"] .when h1 .lc2{color:#FFFDF8}:root[data-season="winter"] .when h1 .lc3{color:#7FD39B}:root[data-season="winter"] .when h1 .lc4{color:#9CC0FF}
+:root[data-season="winter"] .hflower,:root[data-season="winter"] .hstar{color:#FFFDF8!important}
+:root[data-season="winter"] .mc.today{background:#FFE1A8}
+#bgDlg .sheet{gap:12px}
+
+/* garland instead of tree */
+:root[data-season="winter"] .hdeco{display:none}
+:root[data-season="winter"] .inner{padding-top:50px}
+:root[data-season="winter"] .hstar.s1{top:54px}
+:root[data-season="winter"] .hstar.s2{top:70px}
+:root[data-season="winter"] .hflower{display:none}
+
+.garland{display:none}
+:root[data-season="winter"] .garland{display:block;position:absolute;left:0;right:0;top:0;height:50px;pointer-events:none;z-index:1;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='150'%20height='50'%3E%3Cpath%20d='M0%206%20Q37.5%2026%2075%206%20T150%206'%20fill='none'%20stroke='%231F2A1E'%20stroke-width='2'/%3E%3Crect%20x='14'%20y='12'%20width='6'%20height='5'%20rx='1'%20fill='%233B3B3B'%20stroke='%231F2A1E'%20stroke-width='1.5'/%3E%3Cpath%20d='M17%2017%20C10%2024%2011%2034%2017%2036%20C23%2034%2024%2024%2017%2017Z'%20fill='%23B8952A'%20stroke='%231F2A1E'%20stroke-width='1.5'/%3E%3Crect%20x='34'%20y='17'%20width='6'%20height='5'%20rx='1'%20fill='%233B3B3B'%20stroke='%231F2A1E'%20stroke-width='1.5'/%3E%3Cpath%20d='M37%2022%20C30%2029%2031%2039%2037%2041%20C43%2039%2044%2029%2037%2022Z'%20fill='%232F7A43'%20stroke='%231F2A1E'%20stroke-width='1.5'/%3E%3Crect%20x='54'%20y='12'%20width='6'%20height='5'%20rx='1'%20fill='%233B3B3B'%20stroke='%231F2A1E'%20stroke-width='1.5'/%3E%3Cpath%20d='M57%2017%20C50%2024%2051%2034%2057%2036%20C63%2034%2064%2024%2057%2017Z'%20fill='%232F55A8'%20stroke='%231F2A1E'%20stroke-width='1.5'/%3E%3Crect%20x='89'%20y='12'%20width='6'%20height='5'%20rx='1'%20fill='%233B3B3B'%20stroke='%231F2A1E'%20stroke-width='1.5'/%3E%3Cpath%20d='M92%2017%20C85%2024%2086%2034%2092%2036%20C98%2034%2099%2024%2092%2017Z'%20fill='%23B8561D'%20stroke='%231F2A1E'%20stroke-width='1.5'/%3E%3Crect%20x='109'%20y='17'%20width='6'%20height='5'%20rx='1'%20fill='%233B3B3B'%20stroke='%231F2A1E'%20stroke-width='1.5'/%3E%3Cpath%20d='M112%2022%20C105%2029%20106%2039%20112%2041%20C118%2039%20119%2029%20112%2022Z'%20fill='%23B04479'%20stroke='%231F2A1E'%20stroke-width='1.5'/%3E%3Crect%20x='129'%20y='12'%20width='6'%20height='5'%20rx='1'%20fill='%233B3B3B'%20stroke='%231F2A1E'%20stroke-width='1.5'/%3E%3Cpath%20d='M132%2017%20C125%2024%20126%2034%20132%2036%20C138%2034%20139%2024%20132%2017Z'%20fill='%23BDB6A8'%20stroke='%231F2A1E'%20stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:repeat-x;background-position:center top}
+.garland i{position:absolute;inset:0;background-repeat:repeat-x;background-position:center top}
+.garland .ga{background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='150'%20height='50'%3E%3Cdefs%3E%3Cfilter%20id='b'%20x='-1'%20y='-1'%20width='3'%20height='3'%3E%3CfeGaussianBlur%20stdDeviation='4'/%3E%3C/filter%3E%3C/defs%3E%3Ccircle%20cx='17'%20cy='28'%20r='11'%20fill='%23FFD54A'%20opacity='.55'%20filter='url%28%23b%29'/%3E%3Crect%20x='14'%20y='12'%20width='6'%20height='5'%20rx='1'%20fill='%233B3B3B'%20stroke='%231F2A1E'%20stroke-width='1.5'/%3E%3Cpath%20d='M17%2017%20C10%2024%2011%2034%2017%2036%20C23%2034%2024%2024%2017%2017Z'%20fill='%23FFD54A'%20stroke='%231F2A1E'%20stroke-width='1.5'/%3E%3Ccircle%20cx='15'%20cy='25'%20r='1.8'%20fill='%23fff'%20opacity='.8'/%3E%3Ccircle%20cx='57'%20cy='28'%20r='11'%20fill='%235B8DEF'%20opacity='.55'%20filter='url%28%23b%29'/%3E%3Crect%20x='54'%20y='12'%20width='6'%20height='5'%20rx='1'%20fill='%233B3B3B'%20stroke='%231F2A1E'%20stroke-width='1.5'/%3E%3Cpath%20d='M57%2017%20C50%2024%2051%2034%2057%2036%20C63%2034%2064%2024%2057%2017Z'%20fill='%235B8DEF'%20stroke='%231F2A1E'%20stroke-width='1.5'/%3E%3Ccircle%20cx='55'%20cy='25'%20r='1.8'%20fill='%23fff'%20opacity='.8'/%3E%3Ccircle%20cx='112'%20cy='33'%20r='11'%20fill='%23FF6FB0'%20opacity='.55'%20filter='url%28%23b%29'/%3E%3Crect%20x='109'%20y='17'%20width='6'%20height='5'%20rx='1'%20fill='%233B3B3B'%20stroke='%231F2A1E'%20stroke-width='1.5'/%3E%3Cpath%20d='M112%2022%20C105%2029%20106%2039%20112%2041%20C118%2039%20119%2029%20112%2022Z'%20fill='%23FF6FB0'%20stroke='%231F2A1E'%20stroke-width='1.5'/%3E%3Ccircle%20cx='110'%20cy='30'%20r='1.8'%20fill='%23fff'%20opacity='.8'/%3E%3C/svg%3E");animation:twinkle 2.6s ease-in-out infinite}
+.garland .gb{background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='150'%20height='50'%3E%3Cdefs%3E%3Cfilter%20id='b'%20x='-1'%20y='-1'%20width='3'%20height='3'%3E%3CfeGaussianBlur%20stdDeviation='4'/%3E%3C/filter%3E%3C/defs%3E%3Ccircle%20cx='37'%20cy='33'%20r='11'%20fill='%234FC06A'%20opacity='.55'%20filter='url%28%23b%29'/%3E%3Crect%20x='34'%20y='17'%20width='6'%20height='5'%20rx='1'%20fill='%233B3B3B'%20stroke='%231F2A1E'%20stroke-width='1.5'/%3E%3Cpath%20d='M37%2022%20C30%2029%2031%2039%2037%2041%20C43%2039%2044%2029%2037%2022Z'%20fill='%234FC06A'%20stroke='%231F2A1E'%20stroke-width='1.5'/%3E%3Ccircle%20cx='35'%20cy='30'%20r='1.8'%20fill='%23fff'%20opacity='.8'/%3E%3Ccircle%20cx='92'%20cy='28'%20r='11'%20fill='%23FF8A3D'%20opacity='.55'%20filter='url%28%23b%29'/%3E%3Crect%20x='89'%20y='12'%20width='6'%20height='5'%20rx='1'%20fill='%233B3B3B'%20stroke='%231F2A1E'%20stroke-width='1.5'/%3E%3Cpath%20d='M92%2017%20C85%2024%2086%2034%2092%2036%20C98%2034%2099%2024%2092%2017Z'%20fill='%23FF8A3D'%20stroke='%231F2A1E'%20stroke-width='1.5'/%3E%3Ccircle%20cx='90'%20cy='25'%20r='1.8'%20fill='%23fff'%20opacity='.8'/%3E%3Ccircle%20cx='132'%20cy='28'%20r='11'%20fill='%23FFFDF8'%20opacity='.55'%20filter='url%28%23b%29'/%3E%3Crect%20x='129'%20y='12'%20width='6'%20height='5'%20rx='1'%20fill='%233B3B3B'%20stroke='%231F2A1E'%20stroke-width='1.5'/%3E%3Cpath%20d='M132%2017%20C125%2024%20126%2034%20132%2036%20C138%2034%20139%2024%20132%2017Z'%20fill='%23FFFDF8'%20stroke='%231F2A1E'%20stroke-width='1.5'/%3E%3Ccircle%20cx='130'%20cy='25'%20r='1.8'%20fill='%23fff'%20opacity='.8'/%3E%3C/svg%3E");animation:twinkle 2.6s ease-in-out infinite;animation-delay:-1.3s}
+@keyframes twinkle{0%,100%{opacity:1}50%{opacity:.08}}
+@media (prefers-reduced-motion:reduce){.garland i{animation:none}}
+:root[data-season="winter"] .hstar{display:none}
+
+/* new year wallpapers */
+:root[data-bg="ny-snow"] body{background-color:#FBF6EE;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='90'%20height='90'%3E%3Crect%20width='90'%20height='90'%20fill='%23FBF6EE'/%3E%3Cg%20transform='translate%2818%2020%29'%20stroke='%23D6CDE6'%20stroke-width='1.6'%20stroke-linecap='round'%3E%3Cpath%20d='M0%20-7V7M-7%200H7M-4.8999999999999995%20-4.8999999999999995L4.8999999999999995%204.8999999999999995M4.8999999999999995%20-4.8999999999999995L-4.8999999999999995%204.8999999999999995'/%3E%3C/g%3E%3Cg%20transform='translate%2864%2058%29'%20stroke='%23E0D8EC'%20stroke-width='1.6'%20stroke-linecap='round'%3E%3Cpath%20d='M0%20-5V5M-5%200H5M-3.5%20-3.5L3.5%203.5M3.5%20-3.5L-3.5%203.5'/%3E%3C/g%3E%3Cg%20transform='translate%2840%2080%29'%20stroke='%23D6CDE6'%20stroke-width='1.6'%20stroke-linecap='round'%3E%3Cpath%20d='M0%20-3.5V3.5M-3.5%200H3.5M-2.4499999999999997%20-2.4499999999999997L2.4499999999999997%202.4499999999999997M2.4499999999999997%20-2.4499999999999997L-2.4499999999999997%202.4499999999999997'/%3E%3C/g%3E%3Ccircle%20cx='70'%20cy='16'%20r='1.6'%20fill='%23D6CDE6'/%3E%3Ccircle%20cx='12'%20cy='62'%20r='1.4'%20fill='%23D6CDE6'/%3E%3C/svg%3E")}
+.bgopt[data-bg="ny-snow"] i{background-color:#FBF6EE;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='90'%20height='90'%3E%3Crect%20width='90'%20height='90'%20fill='%23FBF6EE'/%3E%3Cg%20transform='translate%2818%2020%29'%20stroke='%23D6CDE6'%20stroke-width='1.6'%20stroke-linecap='round'%3E%3Cpath%20d='M0%20-7V7M-7%200H7M-4.8999999999999995%20-4.8999999999999995L4.8999999999999995%204.8999999999999995M4.8999999999999995%20-4.8999999999999995L-4.8999999999999995%204.8999999999999995'/%3E%3C/g%3E%3Cg%20transform='translate%2864%2058%29'%20stroke='%23E0D8EC'%20stroke-width='1.6'%20stroke-linecap='round'%3E%3Cpath%20d='M0%20-5V5M-5%200H5M-3.5%20-3.5L3.5%203.5M3.5%20-3.5L-3.5%203.5'/%3E%3C/g%3E%3Cg%20transform='translate%2840%2080%29'%20stroke='%23D6CDE6'%20stroke-width='1.6'%20stroke-linecap='round'%3E%3Cpath%20d='M0%20-3.5V3.5M-3.5%200H3.5M-2.4499999999999997%20-2.4499999999999997L2.4499999999999997%202.4499999999999997M2.4499999999999997%20-2.4499999999999997L-2.4499999999999997%202.4499999999999997'/%3E%3C/g%3E%3Ccircle%20cx='70'%20cy='16'%20r='1.6'%20fill='%23D6CDE6'/%3E%3Ccircle%20cx='12'%20cy='62'%20r='1.4'%20fill='%23D6CDE6'/%3E%3C/svg%3E")}
+:root[data-bg="ny-knit"] body{background-color:#FBF6EE;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='60'%20height='40'%3E%3Crect%20width='60'%20height='40'%20fill='%23FCEEEE'/%3E%3Cpath%20d='M2%206%20l4%205%20l4%20-5'%20stroke='%23F2C4CA'%20stroke-width='2.2'%20fill='none'%20stroke-linejoin='round'/%3E%3Cpath%20d='M12%206%20l4%205%20l4%20-5'%20stroke='%23F2C4CA'%20stroke-width='2.2'%20fill='none'%20stroke-linejoin='round'/%3E%3Cpath%20d='M22%206%20l4%205%20l4%20-5'%20stroke='%23F2C4CA'%20stroke-width='2.2'%20fill='none'%20stroke-linejoin='round'/%3E%3Cpath%20d='M32%206%20l4%205%20l4%20-5'%20stroke='%23F2C4CA'%20stroke-width='2.2'%20fill='none'%20stroke-linejoin='round'/%3E%3Cpath%20d='M42%206%20l4%205%20l4%20-5'%20stroke='%23F2C4CA'%20stroke-width='2.2'%20fill='none'%20stroke-linejoin='round'/%3E%3Cpath%20d='M52%206%20l4%205%20l4%20-5'%20stroke='%23F2C4CA'%20stroke-width='2.2'%20fill='none'%20stroke-linejoin='round'/%3E%3Cg%20transform='translate%2815%2027%29'%20stroke='%23F2C4CA'%20stroke-width='1.8'%20stroke-linecap='round'%3E%3Cpath%20d='M0%20-5V5M-5%200H5M-3.5%20-3.5L3.5%203.5M3.5%20-3.5L-3.5%203.5'/%3E%3C/g%3E%3Cg%20transform='translate%2845%2027%29'%20stroke='%23F2C4CA'%20stroke-width='1.8'%20stroke-linecap='round'%3E%3Cpath%20d='M0%20-5V5M-5%200H5M-3.5%20-3.5L3.5%203.5M3.5%20-3.5L-3.5%203.5'/%3E%3C/g%3E%3C/svg%3E")}
+.bgopt[data-bg="ny-knit"] i{background-color:#FBF6EE;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='60'%20height='40'%3E%3Crect%20width='60'%20height='40'%20fill='%23FCEEEE'/%3E%3Cpath%20d='M2%206%20l4%205%20l4%20-5'%20stroke='%23F2C4CA'%20stroke-width='2.2'%20fill='none'%20stroke-linejoin='round'/%3E%3Cpath%20d='M12%206%20l4%205%20l4%20-5'%20stroke='%23F2C4CA'%20stroke-width='2.2'%20fill='none'%20stroke-linejoin='round'/%3E%3Cpath%20d='M22%206%20l4%205%20l4%20-5'%20stroke='%23F2C4CA'%20stroke-width='2.2'%20fill='none'%20stroke-linejoin='round'/%3E%3Cpath%20d='M32%206%20l4%205%20l4%20-5'%20stroke='%23F2C4CA'%20stroke-width='2.2'%20fill='none'%20stroke-linejoin='round'/%3E%3Cpath%20d='M42%206%20l4%205%20l4%20-5'%20stroke='%23F2C4CA'%20stroke-width='2.2'%20fill='none'%20stroke-linejoin='round'/%3E%3Cpath%20d='M52%206%20l4%205%20l4%20-5'%20stroke='%23F2C4CA'%20stroke-width='2.2'%20fill='none'%20stroke-linejoin='round'/%3E%3Cg%20transform='translate%2815%2027%29'%20stroke='%23F2C4CA'%20stroke-width='1.8'%20stroke-linecap='round'%3E%3Cpath%20d='M0%20-5V5M-5%200H5M-3.5%20-3.5L3.5%203.5M3.5%20-3.5L-3.5%203.5'/%3E%3C/g%3E%3Cg%20transform='translate%2845%2027%29'%20stroke='%23F2C4CA'%20stroke-width='1.8'%20stroke-linecap='round'%3E%3Cpath%20d='M0%20-5V5M-5%200H5M-3.5%20-3.5L3.5%203.5M3.5%20-3.5L-3.5%203.5'/%3E%3C/g%3E%3C/svg%3E")}
+:root[data-bg="ny-candy"] body{background-color:#FBF6EE;background-image:repeating-linear-gradient(135deg,#FBE1E4 0 14px,#FFF8F2 14px 28px)}
+.bgopt[data-bg="ny-candy"] i{background-color:#FBF6EE;background-image:repeating-linear-gradient(135deg,#FBE1E4 0 14px,#FFF8F2 14px 28px)}
+:root[data-bg="ny-trees"] body{background-color:#FBF6EE;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='80'%20height='80'%3E%3Crect%20width='80'%20height='80'%20fill='%23F6F7F0'/%3E%3Cpath%20transform='translate%2818%2024%29%20scale%281.1%29'%20d='M0%20-10L6%200H3L8%208H-8L-3%200H-6Z'%20fill='%23CBE5D2'/%3E%3Cpath%20transform='translate%2858%2062%29%20scale%280.9%29'%20d='M0%20-10L6%200H3L8%208H-8L-3%200H-6Z'%20fill='%23CBE5D2'/%3E%3Ccircle%20cx='56'%20cy='20'%20r='1.6'%20fill='%23E7C9CC'/%3E%3Ccircle%20cx='20'%20cy='62'%20r='1.6'%20fill='%23E7C9CC'/%3E%3C/svg%3E")}
+.bgopt[data-bg="ny-trees"] i{background-color:#FBF6EE;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='80'%20height='80'%3E%3Crect%20width='80'%20height='80'%20fill='%23F6F7F0'/%3E%3Cpath%20transform='translate%2818%2024%29%20scale%281.1%29'%20d='M0%20-10L6%200H3L8%208H-8L-3%200H-6Z'%20fill='%23CBE5D2'/%3E%3Cpath%20transform='translate%2858%2062%29%20scale%280.9%29'%20d='M0%20-10L6%200H3L8%208H-8L-3%200H-6Z'%20fill='%23CBE5D2'/%3E%3Ccircle%20cx='56'%20cy='20'%20r='1.6'%20fill='%23E7C9CC'/%3E%3Ccircle%20cx='20'%20cy='62'%20r='1.6'%20fill='%23E7C9CC'/%3E%3C/svg%3E")}
+:root[data-bg="ny-gifts"] body{background-color:#FBF6EE;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='96'%20height='96'%3E%3Crect%20width='96'%20height='96'%20fill='%23FCF4EA'/%3E%3Cg%20transform='translate%2822%2026%29'%3E%3Crect%20x='-7'%20y='-6'%20width='14'%20height='12'%20rx='2'%20fill='%23F7D3D6'/%3E%3Crect%20x='-1.5'%20y='-6'%20width='3'%20height='12'%20fill='%23F0B7BD'/%3E%3Cpath%20d='M0%20-6%20q-5%20-6%20-6%20-1%20M0%20-6%20q5%20-6%206%20-1'%20stroke='%23F0B7BD'%20stroke-width='1.6'%20fill='none'/%3E%3C/g%3E%3Cg%20transform='translate%2870%2070%29'%3E%3Crect%20x='-7'%20y='-6'%20width='14'%20height='12'%20rx='2'%20fill='%23D7EBDD'/%3E%3Crect%20x='-1.5'%20y='-6'%20width='3'%20height='12'%20fill='%23B9DCC3'/%3E%3Cpath%20d='M0%20-6%20q-5%20-6%20-6%20-1%20M0%20-6%20q5%20-6%206%20-1'%20stroke='%23B9DCC3'%20stroke-width='1.6'%20fill='none'/%3E%3C/g%3E%3Cpath%20transform='translate%2872%2022%29%20scale%280.4%29'%20d='M0%20-10L2.9%20-3.1%2010%20-3.1%204.3%201.2%206.5%208.1%200%203.9%20-6.5%208.1%20-4.3%201.2%20-10%20-3.1%20-2.9%20-3.1Z'%20fill='%23F3DCA4'/%3E%3Cpath%20transform='translate%2824%2074%29%20scale%280.35%29'%20d='M0%20-10L2.9%20-3.1%2010%20-3.1%204.3%201.2%206.5%208.1%200%203.9%20-6.5%208.1%20-4.3%201.2%20-10%20-3.1%20-2.9%20-3.1Z'%20fill='%23F3DCA4'/%3E%3C/svg%3E")}
+.bgopt[data-bg="ny-gifts"] i{background-color:#FBF6EE;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='96'%20height='96'%3E%3Crect%20width='96'%20height='96'%20fill='%23FCF4EA'/%3E%3Cg%20transform='translate%2822%2026%29'%3E%3Crect%20x='-7'%20y='-6'%20width='14'%20height='12'%20rx='2'%20fill='%23F7D3D6'/%3E%3Crect%20x='-1.5'%20y='-6'%20width='3'%20height='12'%20fill='%23F0B7BD'/%3E%3Cpath%20d='M0%20-6%20q-5%20-6%20-6%20-1%20M0%20-6%20q5%20-6%206%20-1'%20stroke='%23F0B7BD'%20stroke-width='1.6'%20fill='none'/%3E%3C/g%3E%3Cg%20transform='translate%2870%2070%29'%3E%3Crect%20x='-7'%20y='-6'%20width='14'%20height='12'%20rx='2'%20fill='%23D7EBDD'/%3E%3Crect%20x='-1.5'%20y='-6'%20width='3'%20height='12'%20fill='%23B9DCC3'/%3E%3Cpath%20d='M0%20-6%20q-5%20-6%20-6%20-1%20M0%20-6%20q5%20-6%206%20-1'%20stroke='%23B9DCC3'%20stroke-width='1.6'%20fill='none'/%3E%3C/g%3E%3Cpath%20transform='translate%2872%2022%29%20scale%280.4%29'%20d='M0%20-10L2.9%20-3.1%2010%20-3.1%204.3%201.2%206.5%208.1%200%203.9%20-6.5%208.1%20-4.3%201.2%20-10%20-3.1%20-2.9%20-3.1Z'%20fill='%23F3DCA4'/%3E%3Cpath%20transform='translate%2824%2074%29%20scale%280.35%29'%20d='M0%20-10L2.9%20-3.1%2010%20-3.1%204.3%201.2%206.5%208.1%200%203.9%20-6.5%208.1%20-4.3%201.2%20-10%20-3.1%20-2.9%20-3.1Z'%20fill='%23F3DCA4'/%3E%3C/svg%3E")}
+:root[data-bg="ny-night"] body{background-color:#FBF6EE;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='90'%20height='90'%3E%3Crect%20width='90'%20height='90'%20fill='%2324305C'/%3E%3Cpath%20transform='translate%2816%2018%29%20scale%280.4%29'%20d='M0%20-10L2.9%20-3.1%2010%20-3.1%204.3%201.2%206.5%208.1%200%203.9%20-6.5%208.1%20-4.3%201.2%20-10%20-3.1%20-2.9%20-3.1Z'%20fill='%23F2C75C'/%3E%3Cpath%20transform='translate%2862%2054%29%20scale%280.3%29'%20d='M0%20-10L2.9%20-3.1%2010%20-3.1%204.3%201.2%206.5%208.1%200%203.9%20-6.5%208.1%20-4.3%201.2%20-10%20-3.1%20-2.9%20-3.1Z'%20fill='%23F2C75C'/%3E%3Ccircle%20cx='44'%20cy='14'%20r='1.4'%20fill='%23FFF6DA'/%3E%3Ccircle%20cx='80'%20cy='22'%20r='1'%20fill='%23FFF6DA'/%3E%3Ccircle%20cx='30'%20cy='70'%20r='1.2'%20fill='%23FFF6DA'/%3E%3Ccircle%20cx='74'%20cy='84'%20r='1.4'%20fill='%23FFF6DA'/%3E%3Cg%20transform='translate%2836%2044%29'%20stroke='%235A6BA3'%20stroke-width='1.6'%20stroke-linecap='round'%3E%3Cpath%20d='M0%20-3V3M-3%200H3M-2.0999999999999996%20-2.0999999999999996L2.0999999999999996%202.0999999999999996M2.0999999999999996%20-2.0999999999999996L-2.0999999999999996%202.0999999999999996'/%3E%3C/g%3E%3C/svg%3E")}
+.bgopt[data-bg="ny-night"] i{background-color:#FBF6EE;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='90'%20height='90'%3E%3Crect%20width='90'%20height='90'%20fill='%2324305C'/%3E%3Cpath%20transform='translate%2816%2018%29%20scale%280.4%29'%20d='M0%20-10L2.9%20-3.1%2010%20-3.1%204.3%201.2%206.5%208.1%200%203.9%20-6.5%208.1%20-4.3%201.2%20-10%20-3.1%20-2.9%20-3.1Z'%20fill='%23F2C75C'/%3E%3Cpath%20transform='translate%2862%2054%29%20scale%280.3%29'%20d='M0%20-10L2.9%20-3.1%2010%20-3.1%204.3%201.2%206.5%208.1%200%203.9%20-6.5%208.1%20-4.3%201.2%20-10%20-3.1%20-2.9%20-3.1Z'%20fill='%23F2C75C'/%3E%3Ccircle%20cx='44'%20cy='14'%20r='1.4'%20fill='%23FFF6DA'/%3E%3Ccircle%20cx='80'%20cy='22'%20r='1'%20fill='%23FFF6DA'/%3E%3Ccircle%20cx='30'%20cy='70'%20r='1.2'%20fill='%23FFF6DA'/%3E%3Ccircle%20cx='74'%20cy='84'%20r='1.4'%20fill='%23FFF6DA'/%3E%3Cg%20transform='translate%2836%2044%29'%20stroke='%235A6BA3'%20stroke-width='1.6'%20stroke-linecap='round'%3E%3Cpath%20d='M0%20-3V3M-3%200H3M-2.0999999999999996%20-2.0999999999999996L2.0999999999999996%202.0999999999999996M2.0999999999999996%20-2.0999999999999996L-2.0999999999999996%202.0999999999999996'/%3E%3C/g%3E%3C/svg%3E")}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"])[data-bg="ny-snow"] body,:root:not([data-theme="light"]) .bgopt[data-bg="ny-snow"] i{background-color:#1D1A22;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='90'%20height='90'%3E%3Crect%20width='90'%20height='90'%20fill='%231D1A22'/%3E%3Cg%20transform='translate%2818%2020%29'%20stroke='%233A3346'%20stroke-width='1.6'%20stroke-linecap='round'%3E%3Cpath%20d='M0%20-7V7M-7%200H7M-4.8999999999999995%20-4.8999999999999995L4.8999999999999995%204.8999999999999995M4.8999999999999995%20-4.8999999999999995L-4.8999999999999995%204.8999999999999995'/%3E%3C/g%3E%3Cg%20transform='translate%2864%2058%29'%20stroke='%23332D3F'%20stroke-width='1.6'%20stroke-linecap='round'%3E%3Cpath%20d='M0%20-5V5M-5%200H5M-3.5%20-3.5L3.5%203.5M3.5%20-3.5L-3.5%203.5'/%3E%3C/g%3E%3Cg%20transform='translate%2840%2080%29'%20stroke='%233A3346'%20stroke-width='1.6'%20stroke-linecap='round'%3E%3Cpath%20d='M0%20-3.5V3.5M-3.5%200H3.5M-2.4499999999999997%20-2.4499999999999997L2.4499999999999997%202.4499999999999997M2.4499999999999997%20-2.4499999999999997L-2.4499999999999997%202.4499999999999997'/%3E%3C/g%3E%3C/svg%3E")}
+  :root:not([data-theme="light"])[data-bg="ny-knit"] body,:root:not([data-theme="light"]) .bgopt[data-bg="ny-knit"] i{background-color:#1D1A22;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='60'%20height='40'%3E%3Crect%20width='60'%20height='40'%20fill='%23231A1F'/%3E%3Cpath%20d='M2%206%20l4%205%20l4%20-5'%20stroke='%234A2C35'%20stroke-width='2.2'%20fill='none'/%3E%3Cpath%20d='M12%206%20l4%205%20l4%20-5'%20stroke='%234A2C35'%20stroke-width='2.2'%20fill='none'/%3E%3Cpath%20d='M22%206%20l4%205%20l4%20-5'%20stroke='%234A2C35'%20stroke-width='2.2'%20fill='none'/%3E%3Cpath%20d='M32%206%20l4%205%20l4%20-5'%20stroke='%234A2C35'%20stroke-width='2.2'%20fill='none'/%3E%3Cpath%20d='M42%206%20l4%205%20l4%20-5'%20stroke='%234A2C35'%20stroke-width='2.2'%20fill='none'/%3E%3Cpath%20d='M52%206%20l4%205%20l4%20-5'%20stroke='%234A2C35'%20stroke-width='2.2'%20fill='none'/%3E%3Cg%20transform='translate%2815%2027%29'%20stroke='%234A2C35'%20stroke-width='1.8'%20stroke-linecap='round'%3E%3Cpath%20d='M0%20-5V5M-5%200H5M-3.5%20-3.5L3.5%203.5M3.5%20-3.5L-3.5%203.5'/%3E%3C/g%3E%3Cg%20transform='translate%2845%2027%29'%20stroke='%234A2C35'%20stroke-width='1.8'%20stroke-linecap='round'%3E%3Cpath%20d='M0%20-5V5M-5%200H5M-3.5%20-3.5L3.5%203.5M3.5%20-3.5L-3.5%203.5'/%3E%3C/g%3E%3C/svg%3E")}
+  :root:not([data-theme="light"])[data-bg="ny-candy"] body,:root:not([data-theme="light"]) .bgopt[data-bg="ny-candy"] i{background-color:#1D1A22;background-image:repeating-linear-gradient(135deg,#2A1D23 0 14px,#1D1A22 14px 28px)}
+  :root:not([data-theme="light"])[data-bg="ny-trees"] body,:root:not([data-theme="light"]) .bgopt[data-bg="ny-trees"] i{background-color:#1D1A22;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='80'%20height='80'%3E%3Crect%20width='80'%20height='80'%20fill='%231B1F1C'/%3E%3Cpath%20transform='translate%2818%2024%29%20scale%281.1%29'%20d='M0%20-10L6%200H3L8%208H-8L-3%200H-6Z'%20fill='%232C3D31'/%3E%3Cpath%20transform='translate%2858%2062%29%20scale%280.9%29'%20d='M0%20-10L6%200H3L8%208H-8L-3%200H-6Z'%20fill='%232C3D31'/%3E%3C/svg%3E")}
+  :root:not([data-theme="light"])[data-bg="ny-gifts"] body,:root:not([data-theme="light"]) .bgopt[data-bg="ny-gifts"] i{background-color:#1D1A22;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='96'%20height='96'%3E%3Crect%20width='96'%20height='96'%20fill='%231F1A1C'/%3E%3Cg%20transform='translate%2822%2026%29'%3E%3Crect%20x='-7'%20y='-6'%20width='14'%20height='12'%20rx='2'%20fill='%233B2A2E'/%3E%3Crect%20x='-1.5'%20y='-6'%20width='3'%20height='12'%20fill='%234E3439'/%3E%3Cpath%20d='M0%20-6%20q-5%20-6%20-6%20-1%20M0%20-6%20q5%20-6%206%20-1'%20stroke='%234E3439'%20stroke-width='1.6'%20fill='none'/%3E%3C/g%3E%3Cg%20transform='translate%2870%2070%29'%3E%3Crect%20x='-7'%20y='-6'%20width='14'%20height='12'%20rx='2'%20fill='%23253329'/%3E%3Crect%20x='-1.5'%20y='-6'%20width='3'%20height='12'%20fill='%232F4235'/%3E%3Cpath%20d='M0%20-6%20q-5%20-6%20-6%20-1%20M0%20-6%20q5%20-6%206%20-1'%20stroke='%232F4235'%20stroke-width='1.6'%20fill='none'/%3E%3C/g%3E%3Cpath%20transform='translate%2872%2022%29%20scale%280.4%29'%20d='M0%20-10L2.9%20-3.1%2010%20-3.1%204.3%201.2%206.5%208.1%200%203.9%20-6.5%208.1%20-4.3%201.2%20-10%20-3.1%20-2.9%20-3.1Z'%20fill='%234A4128'/%3E%3C/svg%3E")}
+  :root:not([data-theme="light"])[data-bg="ny-night"] body,:root:not([data-theme="light"]) .bgopt[data-bg="ny-night"] i{background-color:#1D1A22;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='90'%20height='90'%3E%3Crect%20width='90'%20height='90'%20fill='%23141A33'/%3E%3Cpath%20transform='translate%2816%2018%29%20scale%280.4%29'%20d='M0%20-10L2.9%20-3.1%2010%20-3.1%204.3%201.2%206.5%208.1%200%203.9%20-6.5%208.1%20-4.3%201.2%20-10%20-3.1%20-2.9%20-3.1Z'%20fill='%23C9A243'/%3E%3Cpath%20transform='translate%2862%2054%29%20scale%280.3%29'%20d='M0%20-10L2.9%20-3.1%2010%20-3.1%204.3%201.2%206.5%208.1%200%203.9%20-6.5%208.1%20-4.3%201.2%20-10%20-3.1%20-2.9%20-3.1Z'%20fill='%23C9A243'/%3E%3Ccircle%20cx='44'%20cy='14'%20r='1.4'%20fill='%23C9C0A0'/%3E%3Ccircle%20cx='74'%20cy='84'%20r='1.4'%20fill='%23C9C0A0'/%3E%3C/svg%3E")}
+}
+:root[data-theme="dark"][data-bg="ny-snow"] body,:root[data-theme="dark"] .bgopt[data-bg="ny-snow"] i{background-color:#1D1A22;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='90'%20height='90'%3E%3Crect%20width='90'%20height='90'%20fill='%231D1A22'/%3E%3Cg%20transform='translate%2818%2020%29'%20stroke='%233A3346'%20stroke-width='1.6'%20stroke-linecap='round'%3E%3Cpath%20d='M0%20-7V7M-7%200H7M-4.8999999999999995%20-4.8999999999999995L4.8999999999999995%204.8999999999999995M4.8999999999999995%20-4.8999999999999995L-4.8999999999999995%204.8999999999999995'/%3E%3C/g%3E%3Cg%20transform='translate%2864%2058%29'%20stroke='%23332D3F'%20stroke-width='1.6'%20stroke-linecap='round'%3E%3Cpath%20d='M0%20-5V5M-5%200H5M-3.5%20-3.5L3.5%203.5M3.5%20-3.5L-3.5%203.5'/%3E%3C/g%3E%3Cg%20transform='translate%2840%2080%29'%20stroke='%233A3346'%20stroke-width='1.6'%20stroke-linecap='round'%3E%3Cpath%20d='M0%20-3.5V3.5M-3.5%200H3.5M-2.4499999999999997%20-2.4499999999999997L2.4499999999999997%202.4499999999999997M2.4499999999999997%20-2.4499999999999997L-2.4499999999999997%202.4499999999999997'/%3E%3C/g%3E%3C/svg%3E")}
+:root[data-theme="dark"][data-bg="ny-knit"] body,:root[data-theme="dark"] .bgopt[data-bg="ny-knit"] i{background-color:#1D1A22;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='60'%20height='40'%3E%3Crect%20width='60'%20height='40'%20fill='%23231A1F'/%3E%3Cpath%20d='M2%206%20l4%205%20l4%20-5'%20stroke='%234A2C35'%20stroke-width='2.2'%20fill='none'/%3E%3Cpath%20d='M12%206%20l4%205%20l4%20-5'%20stroke='%234A2C35'%20stroke-width='2.2'%20fill='none'/%3E%3Cpath%20d='M22%206%20l4%205%20l4%20-5'%20stroke='%234A2C35'%20stroke-width='2.2'%20fill='none'/%3E%3Cpath%20d='M32%206%20l4%205%20l4%20-5'%20stroke='%234A2C35'%20stroke-width='2.2'%20fill='none'/%3E%3Cpath%20d='M42%206%20l4%205%20l4%20-5'%20stroke='%234A2C35'%20stroke-width='2.2'%20fill='none'/%3E%3Cpath%20d='M52%206%20l4%205%20l4%20-5'%20stroke='%234A2C35'%20stroke-width='2.2'%20fill='none'/%3E%3Cg%20transform='translate%2815%2027%29'%20stroke='%234A2C35'%20stroke-width='1.8'%20stroke-linecap='round'%3E%3Cpath%20d='M0%20-5V5M-5%200H5M-3.5%20-3.5L3.5%203.5M3.5%20-3.5L-3.5%203.5'/%3E%3C/g%3E%3Cg%20transform='translate%2845%2027%29'%20stroke='%234A2C35'%20stroke-width='1.8'%20stroke-linecap='round'%3E%3Cpath%20d='M0%20-5V5M-5%200H5M-3.5%20-3.5L3.5%203.5M3.5%20-3.5L-3.5%203.5'/%3E%3C/g%3E%3C/svg%3E")}
+:root[data-theme="dark"][data-bg="ny-candy"] body,:root[data-theme="dark"] .bgopt[data-bg="ny-candy"] i{background-color:#1D1A22;background-image:repeating-linear-gradient(135deg,#2A1D23 0 14px,#1D1A22 14px 28px)}
+:root[data-theme="dark"][data-bg="ny-trees"] body,:root[data-theme="dark"] .bgopt[data-bg="ny-trees"] i{background-color:#1D1A22;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='80'%20height='80'%3E%3Crect%20width='80'%20height='80'%20fill='%231B1F1C'/%3E%3Cpath%20transform='translate%2818%2024%29%20scale%281.1%29'%20d='M0%20-10L6%200H3L8%208H-8L-3%200H-6Z'%20fill='%232C3D31'/%3E%3Cpath%20transform='translate%2858%2062%29%20scale%280.9%29'%20d='M0%20-10L6%200H3L8%208H-8L-3%200H-6Z'%20fill='%232C3D31'/%3E%3C/svg%3E")}
+:root[data-theme="dark"][data-bg="ny-gifts"] body,:root[data-theme="dark"] .bgopt[data-bg="ny-gifts"] i{background-color:#1D1A22;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='96'%20height='96'%3E%3Crect%20width='96'%20height='96'%20fill='%231F1A1C'/%3E%3Cg%20transform='translate%2822%2026%29'%3E%3Crect%20x='-7'%20y='-6'%20width='14'%20height='12'%20rx='2'%20fill='%233B2A2E'/%3E%3Crect%20x='-1.5'%20y='-6'%20width='3'%20height='12'%20fill='%234E3439'/%3E%3Cpath%20d='M0%20-6%20q-5%20-6%20-6%20-1%20M0%20-6%20q5%20-6%206%20-1'%20stroke='%234E3439'%20stroke-width='1.6'%20fill='none'/%3E%3C/g%3E%3Cg%20transform='translate%2870%2070%29'%3E%3Crect%20x='-7'%20y='-6'%20width='14'%20height='12'%20rx='2'%20fill='%23253329'/%3E%3Crect%20x='-1.5'%20y='-6'%20width='3'%20height='12'%20fill='%232F4235'/%3E%3Cpath%20d='M0%20-6%20q-5%20-6%20-6%20-1%20M0%20-6%20q5%20-6%206%20-1'%20stroke='%232F4235'%20stroke-width='1.6'%20fill='none'/%3E%3C/g%3E%3Cpath%20transform='translate%2872%2022%29%20scale%280.4%29'%20d='M0%20-10L2.9%20-3.1%2010%20-3.1%204.3%201.2%206.5%208.1%200%203.9%20-6.5%208.1%20-4.3%201.2%20-10%20-3.1%20-2.9%20-3.1Z'%20fill='%234A4128'/%3E%3C/svg%3E")}
+:root[data-theme="dark"][data-bg="ny-night"] body,:root[data-theme="dark"] .bgopt[data-bg="ny-night"] i{background-color:#1D1A22;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='90'%20height='90'%3E%3Crect%20width='90'%20height='90'%20fill='%23141A33'/%3E%3Cpath%20transform='translate%2816%2018%29%20scale%280.4%29'%20d='M0%20-10L2.9%20-3.1%2010%20-3.1%204.3%201.2%206.5%208.1%200%203.9%20-6.5%208.1%20-4.3%201.2%20-10%20-3.1%20-2.9%20-3.1Z'%20fill='%23C9A243'/%3E%3Cpath%20transform='translate%2862%2054%29%20scale%280.3%29'%20d='M0%20-10L2.9%20-3.1%2010%20-3.1%204.3%201.2%206.5%208.1%200%203.9%20-6.5%208.1%20-4.3%201.2%20-10%20-3.1%20-2.9%20-3.1Z'%20fill='%23C9A243'/%3E%3Ccircle%20cx='44'%20cy='14'%20r='1.4'%20fill='%23C9C0A0'/%3E%3Ccircle%20cx='74'%20cy='84'%20r='1.4'%20fill='%23C9C0A0'/%3E%3C/svg%3E")}
+[data-bg="ny-night"] .wg-tip,[data-bg="ny-night"] .section-title,[data-bg="ny-night"] .datehead,[data-bg="ny-night"] .foot,[data-bg="ny-night"] .pasttoggle{color:#FFF6DA}
+[data-bg="ny-night"] .pasttoggle{background:rgba(36,48,92,.6);border-color:#5A6BA3}
+.bgsec{grid-column:1/-1;font-size:13px;color:var(--muted);font-weight:500;margin-top:4px}
+
+/* drum time picker */
+.picker{gap:10px}
+.tphint{font-size:13px;color:var(--muted);text-align:center}
+.tpin{height:54px;border-radius:16px;border:2px solid var(--stroke);background:var(--surface);color:var(--ink);text-align:center;font-size:28px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.02em;width:100%}
+.tpin:focus{outline:none;border-color:var(--ring);box-shadow:0 0 0 3px color-mix(in srgb,var(--ring) 25%,transparent)}
+.tpin.bad{border-color:#D23A62;color:#D23A62}
+.drum{position:relative;display:flex;justify-content:center;align-items:center;gap:6px;height:200px;user-select:none}
+.drum .band{position:absolute;left:8%;right:8%;top:80px;height:40px;border-radius:12px;background:color-mix(in srgb,var(--ring) 14%,var(--surface));border:2px solid var(--ring);pointer-events:none}
+.wh{position:relative;z-index:1;width:84px;height:200px;overflow-y:auto;scroll-snap-type:y mandatory;padding:80px 0;box-sizing:border-box;scrollbar-width:none;-webkit-mask-image:linear-gradient(transparent,#000 32%,#000 68%,transparent);mask-image:linear-gradient(transparent,#000 32%,#000 68%,transparent);overscroll-behavior:contain;outline:none}
+.wh::-webkit-scrollbar{display:none}
+.wh:focus-visible{box-shadow:inset 0 0 0 2px var(--ring);border-radius:12px}
+.wi{height:40px;line-height:40px;text-align:center;scroll-snap-align:center;font-size:24px;font-weight:700;color:var(--ink);opacity:.35;cursor:pointer;font-variant-numeric:tabular-nums;transition:opacity .15s}
+.wi.on{opacity:1}
+.dsep{position:relative;z-index:1;font-size:26px;font-weight:800}
+.tpacts{display:flex;align-items:center;gap:8px}
+.tpacts .sp{flex:1}
+.tpok{height:42px}
+
 .login{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:24px;background:var(--head)}
 .login[hidden]{display:none}
 .login-card{background:var(--surface);border-radius:28px;padding:32px 26px;max-width:380px;width:100%;text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center;box-shadow:0 10px 40px rgba(20,30,60,.15)}
@@ -431,25 +690,47 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
 .login-card h1{margin:0;font-weight:800;font-size:32px;letter-spacing:-.02em}
 .login-card p{margin:0;color:var(--muted)}
 .login-btn{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 22px;font-size:16px}
-.acct{overflow:hidden;padding:0}
-.acct[hidden]{display:none}
-.acct span{display:grid;place-items:center;width:100%;height:100%;font-weight:800}
-.acct img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.acctrow{display:flex;align-items:center;gap:10px;justify-content:flex-start;height:52px}
+.acctrow[hidden]{display:none}
+.acctrow .acct{width:32px;height:32px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:var(--raised);font-weight:800;flex:none}
+.acctrow .acct img{width:100%;height:100%;object-fit:cover}
 #acctDlg .sheet{gap:12px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <filter id="wob"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="4"/></filter>
+ <pattern id="ill-chk" width="12" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="12" fill="#FFF9EE"/><rect width="6" height="6" fill="#FF4F8B"/><rect x="6" y="6" width="6" height="6" fill="#FF4F8B"/></pattern>
+ <symbol id="ill-flower" viewBox="0 0 40 40"><g filter="url(#wob)"><g fill="currentColor"><circle cx="20" cy="9" r="8"/><circle cx="31" cy="17" r="8"/><circle cx="27" cy="30" r="8"/><circle cx="13" cy="30" r="8"/><circle cx="9" cy="17" r="8"/></g><circle cx="20" cy="21" r="6" fill="#F7C948"/></g></symbol>
+ <symbol id="ill-star" viewBox="0 0 40 40"><path filter="url(#wob)" d="M20 2 L25 15 L39 15 L28 24 L32 38 L20 29 L8 38 L12 24 L1 15 L15 15Z" fill="currentColor"/></symbol>
+ <symbol id="ill-heart" viewBox="0 0 40 36"><path filter="url(#wob)" d="M20 34 C-6 18 4 -4 20 10 C36 -4 46 18 20 34Z" fill="currentColor"/></symbol>
+ <symbol id="ill-vase" viewBox="0 0 90 130"><g filter="url(#wob)">
+  <path d="M45 62 L30 22 M45 62 L48 16 M45 62 L66 26" stroke="#4F9E5A" stroke-width="4"/>
+  <use href="#ill-flower" x="12" y="6" width="32" height="32" color="#E8333F"/><use href="#ill-flower" x="33" y="-2" width="30" height="30" color="#FF6F9C"/><use href="#ill-flower" x="52" y="10" width="30" height="30" color="#FFB020"/>
+  <path d="M22 64 Q16 100 30 126 L60 126 Q74 100 68 64Z" fill="url(#ill-chk)" stroke="#2A1E1A" stroke-width="2.5"/></g></symbol>
+ <symbol id="ill-tree" viewBox="0 0 90 130"><g filter="url(#wob)"><path d="M45 4 L70 46 H58 L80 84 H62 L86 116 H4 L28 84 H10 L32 46 H20Z" fill="#2F9A5E" stroke="#2A1E1A" stroke-width="2.5" stroke-linejoin="round"/><rect x="38" y="116" width="14" height="12" fill="#8A5A3C" stroke="#2A1E1A" stroke-width="2"/><path d="M45 0l3 6 6 .5-4.5 4 1.5 6L45 13l-6 3.5 1.5-6L36 6.5l6-.5z" fill="#F2B33D"/><circle cx="34" cy="62" r="4" fill="#D63441"/><circle cx="56" cy="74" r="4" fill="#F28A2E"/><circle cx="40" cy="98" r="4" fill="#FFFDF8"/><circle cx="62" cy="104" r="4" fill="#3D6FD8"/><circle cx="26" cy="104" r="4" fill="#F2B33D"/></g></symbol>
+ <symbol id="ill-snow" viewBox="0 0 40 40"><g stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none" filter="url(#wob)"><path d="M20 3v34M3 20h34M8 8l24 24M32 8L8 32"/><path d="M15 5l5 5 5-5M15 35l5-5 5 5M5 15l5 5-5 5M35 15l-5 5 5 5"/></g></symbol>
+ <symbol id="ill-cat" viewBox="0 0 210 120"><g filter="url(#wob)">
+  <path d="M20 110 Q10 70 60 62 L150 60 Q195 62 190 100 Q185 116 160 114 L40 116 Q22 116 20 110Z" fill="#1E1714"/>
+  <circle cx="60" cy="58" r="34" fill="#1E1714"/><path d="M32 40 L30 8 L54 30Z M72 28 L92 6 L90 42Z" fill="#1E1714"/>
+  <ellipse cx="48" cy="58" rx="8" ry="9" fill="#F7C948"/><ellipse cx="74" cy="58" rx="8" ry="9" fill="#F7C948"/>
+  <ellipse cx="49" cy="59" rx="2.5" ry="6" fill="#1E1714"/><ellipse cx="75" cy="59" rx="2.5" ry="6" fill="#1E1714"/>
+  <path d="M58 72 l3 3 l3 -3" stroke="#F07FA0" stroke-width="3" fill="none"/>
+  <path d="M188 96 Q215 70 196 48" stroke="#1E1714" stroke-width="14" fill="none" stroke-linecap="round"/></g></symbol>
+</svg>
 <header class="head">
+  <div class="garland" aria-hidden="true"><i class="ga"></i><i class="gb"></i></div>
   <div class="inner">
     <div class="top">
-      <div class="when">
-        <div class="wd" id="hWd"></div>
-        <h1 id="hDate"></h1>
-      </div>
-      <button class="round acct" id="acctBtn" aria-label="Аккаунт" title="Аккаунт"><span id="acctPic"></span></button>
+      <div class="wd" id="hWd"></div>
+      <span class="sp"></span>
       <button class="round" id="bgBtn" aria-label="Фон" title="Фон"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="3"/><circle cx="8" cy="8" r="1.6"/><path d="M17 13l-4-4-7 8"/></svg></button>
       <button class="round" id="themeBtn" aria-label="Тема"></button>
+    </div>
+    <div class="when"><h1 id="hDate"></h1>
+      <svg class="hcat-d" viewBox="0 0 210 120" aria-hidden="true"><use href="#ill-cat"/><g class="scarf"><path d="M40 80 Q60 92 84 80 L88 92 Q60 104 36 92Z M70 88 l8 26 l12 -4 l-8 -24Z" fill="#D63441" stroke="#2A1E1A" stroke-width="2"/><path d="M74 96h12M77 104h12" stroke="#FFFDF8" stroke-width="2"/></g></svg>
+      <svg class="hdeco" width="80" height="100" viewBox="0 0 90 130" aria-hidden="true"><use href="#ill-vase"/></svg>
     </div>
     <div class="bar">
       <div class="tabs" role="tablist" aria-label="Вид">
@@ -466,6 +747,8 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
       </div>
     </div>
   </div>
+  <svg class="hcat" viewBox="0 0 210 120" aria-hidden="true"><use href="#ill-cat"/><g class="scarf"><path d="M40 80 Q60 92 84 80 L88 92 Q60 104 36 92Z M70 88 l8 26 l12 -4 l-8 -24Z" fill="#D63441" stroke="#2A1E1A" stroke-width="2"/><path d="M74 96h12M77 104h12" stroke="#FFFDF8" stroke-width="2"/></g></svg>
+  <svg class="hstar s1" aria-hidden="true"><use href="#ill-star"/></svg><svg class="hflower f1" aria-hidden="true"><use href="#ill-flower"/></svg><svg class="hflower f2" aria-hidden="true"><use href="#ill-flower"/></svg><svg class="hstar s2" aria-hidden="true"><use href="#ill-heart"/></svg>
   <svg class="wave" viewBox="0 0 400 18" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0H400V6Q393.3 18 386.7 6T373.3 6T360 6T346.7 6T333.3 6T320 6T306.7 6T293.3 6T280 6T266.7 6T253.3 6T240 6T226.7 6T213.3 6T200 6T186.7 6T173.3 6T160 6T146.7 6T133.3 6T120 6T106.7 6T93.3 6T80 6T66.7 6T53.3 6T40 6T26.7 6T13.3 6T0 6Z"/></svg>
 </header>
 <div class="app">
@@ -477,8 +760,13 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
 
 <dialog id="bgDlg" aria-labelledby="bgTitle">
   <div class="sheet">
-    <h2 id="bgTitle">Фон</h2>
+    <h2 id="bgTitle">Оформление</h2>
+    <span class="glbl">Тема</span>
+    <div class="seg" id="seasonSeg" role="radiogroup" aria-label="Тема"><button type="button" role="radio" data-season="normal">Обычная</button><button type="button" role="radio" data-season="winter">Новогодняя</button></div>
+    <span class="glbl">Фон</span>
     <div class="bgs" id="bgList"></div>
+    <span class="glbl">Аккаунт</span>
+    <button type="button" class="b acctrow" id="acctBtn"><span class="acct" id="acctPic"></span><span>Аккаунт и перенос дел</span></button>
     <div class="acts"><span class="sp"></span><button type="button" class="b primary" id="bgDone">Готово</button></div>
   </div>
 </dialog>
@@ -503,6 +791,11 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
         <div class="cbhead"><button type="button" class="round sm" id="dpPrev" aria-label="Предыдущий месяц"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg></button><span id="dpTitle"></span><button type="button" class="round sm" id="dpNext" aria-label="Следующий месяц"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l5 5-5 5"/></svg></button></div>
         <div class="cbgrid" id="dpGrid"></div>
       </div></div>
+    </div>
+    <div class="grp" id="evLinkGrp" hidden><span class="glbl">К событию</span>
+      <div class="chips" id="fEvLink" role="group" aria-label="Привязать к событию"></div>
+      <p class="hint" id="evLinkHint" hidden>Без времени задача покажется внутри события.</p>
+      <p class="hint" style="margin:0">Можно выбрать событие в другой день — например, подготовиться заранее.</p>
     </div>
     <div class="grp"><span class="glbl">Время</span>
       <div class="trow"><button type="button" class="tbtn" id="fStartBtn" aria-expanded="false"></button><span class="tend" id="fEndLbl"></span></div>
@@ -585,10 +878,10 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
 <script>
 (() => {
   const CATS = [
-    { id: "work",  name: "Работа",  c: "var(--blue)",   fg: "var(--on-accent)" },
-    { id: "study", name: "Ученики", c: "var(--yellow)", fg: "var(--on-accent)" },
-    { id: "me",    name: "Личное",  c: "var(--pink)",   fg: "var(--on-accent)" },
-    { id: "home",  name: "Дом",     c: "var(--mint)",   fg: "var(--on-accent)" },
+    { id: "work",  name: "Работа",  c: "var(--peach)",  fg: "var(--on-accent)", pat: "var(--pat-peach)", plate: "var(--plate-bg)" },
+    { id: "study", name: "Ученики", c: "var(--yellow)", fg: "var(--on-accent)", pat: "var(--pat-yellow)", plate: "var(--plate-bg)" },
+    { id: "me",    name: "Личное",  c: "var(--pink)",   fg: "var(--on-accent)", pat: "var(--pat-pink)", plate: "var(--plate-bg)" },
+    { id: "home",  name: "Дом",     c: "var(--mint)",   fg: "var(--on-accent)", pat: "var(--pat-mint)", plate: "var(--plate-bg)" },
   ];
   const catOf = id => CATS.find(c => c.id === id) || CATS[3];
   const DW = ["Пн","Вт","Ср","Чт","Пт","Сб","Вс"];
@@ -646,22 +939,40 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
   applyTheme();
   // ---------- wallpaper ----------
   const BG_KEY = "planner-bg";
-  const BGS = [["plaid","Клетка"],["stripes","Полоски"],["stars","Звёзды"],["flowers","Цветы"],["none","Без узора"]];
-  let bg = "plaid";
-  try { bg = localStorage.getItem(BG_KEY) || "plaid"; } catch (e) {}
+  const BGS = [["paper","Бумага"],["plaid","Клетка"],["stripes","Полоски"],["stars","Звёзды"],["flowers","Цветы"],["none","Без узора"]];
+  const BGS_NY = [["ny-snow","Снегопад"],["ny-knit","Свитер"],["ny-candy","Леденец"],["ny-trees","Ёлочки"],["ny-gifts","Подарки"],["ny-night","Звёздная ночь"]];
+  let bg = "paper";
+  try { bg = localStorage.getItem(BG_KEY) || "ny-snow"; } catch (e) {}
   function applyBg(){ if (bg === "none") document.documentElement.removeAttribute("data-bg"); else document.documentElement.setAttribute("data-bg", bg); }
   function renderBgList(){
     const box = document.getElementById("bgList"); box.innerHTML = "";
-    BGS.forEach(([id, name]) => {
+    const add = ([id, name]) => {
       const b = el("button", { type: "button", class: "bgopt", "data-bg": id, "aria-pressed": String(bg === id), onclick: () => { bg = id; try { localStorage.setItem(BG_KEY, bg); } catch (e) {} applyBg(); renderBgList(); } }, el("i"), el("span", { text: name }));
       box.append(b);
-    });
+    };
+    box.append(el("span", { class: "bgsec", text: "Новогодние" })); BGS_NY.forEach(add);
+    box.append(el("span", { class: "bgsec", text: "Обычные" })); BGS.forEach(add);
   }
   const bgDlg = document.getElementById("bgDlg");
   document.getElementById("bgBtn").onclick = () => { renderBgList(); bgDlg.showModal(); };
   document.getElementById("bgDone").onclick = () => bgDlg.close();
   bgDlg.addEventListener("click", e => { if (e.target === bgDlg) bgDlg.close(); });
   applyBg();
+
+  // ---------- season ----------
+  const SEASON_KEY = "planner-season";
+  let season = "winter";
+  try { season = localStorage.getItem(SEASON_KEY) || "winter"; } catch (e) {}
+  function applySeason(){
+    const w = season === "winter";
+    document.documentElement.setAttribute("data-season", season);
+    document.querySelectorAll(".hdeco use").forEach(u => u.setAttribute("href", w ? "#ill-tree" : "#ill-vase"));
+    document.querySelectorAll(".hflower use, .hstar use").forEach(u => u.setAttribute("href", w ? "#ill-snow" : (u.closest(".hstar.s2") ? "#ill-heart" : u.closest(".hstar") ? "#ill-star" : "#ill-flower")));
+    document.querySelectorAll("#seasonSeg button").forEach(b => b.setAttribute("aria-checked", String(b.dataset.season === season)));
+    const tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.content = w ? "#D63441" : "#B9A2F6";
+  }
+  document.querySelectorAll("#seasonSeg button").forEach(b => b.onclick = () => { season = b.dataset.season; if (season === "winter" && bg === "paper") { bg = "ny-snow"; } else if (season !== "winter" && bg.startsWith("ny-")) { bg = "paper"; } try { localStorage.setItem(BG_KEY, bg); } catch (e) {} applyBg(); renderBgList(); try { localStorage.setItem(SEASON_KEY, season); } catch (e) {} applySeason(); render(); });
+  applySeason();
 
   // ---------- storage (Firebase) ----------
   const firebaseConfig = {
@@ -711,7 +1022,7 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
   }
   document.getElementById("loginBtn").onclick = signIn;
   const acctDlg = document.getElementById("acctDlg");
-  document.getElementById("acctBtn").onclick = () => acctDlg.showModal();
+  document.getElementById("acctBtn").onclick = () => { document.getElementById("bgDlg").close(); acctDlg.showModal(); };
   document.getElementById("acctClose").onclick = () => acctDlg.close();
   document.getElementById("acctData").onclick = () => { acctDlg.close(); openData(); };
   document.getElementById("logoutBtn").onclick = async () => { acctDlg.close(); if (unsub) unsub(); unsub = null; docRef = null; state = { tasks: [] }; saveLocal(); await auth.signOut(); };
@@ -788,7 +1099,7 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
     if (t._occ) { const b = find(t.id); b.doneOn = b.doneOn || []; b.doneOn = t.done ? b.doneOn.filter(x => x !== t.date) : b.doneOn.concat(t.date); scheduleSave(); render(); }
     else update(t.id, { done: !t.done });
   }
-  const plain = t => ({ text: t.text, time: t.time || "", end: t.end || "", cat: t.cat, kind: t.kind || "task" });
+  const plain = t => ({ text: t.text, time: t.time || "", end: t.end || "", cat: t.cat, kind: t.kind || "task", evId: t.evId || null, evDate: t.evDate || null });
   function detach(base, k, patch){
     base.skip = (base.skip || []).concat(k);
     const n = { id: uid(), created: Date.now(), done: (base.doneOn || []).includes(k), ...plain(base), date: k, ...patch };
@@ -809,7 +1120,39 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
   const durLbl = m => m < 60 ? m + " мин" : m % 60 === 0 ? (m / 60) + " ч" : m % 60 === 30 ? Math.floor(m / 60) + ",5 ч" : Math.floor(m / 60) + " ч " + (m % 60) + " мин";
   const DURS = { task: [15, 30, 60, 90, 120], event: [60, 120, 240, 480, 540] };
   let editing = null, editOcc = null, fCat = "work", fKind = "task", fDate = null, fStart = "", fDur = 60, fEnd = "";
-  let editItem = null;
+  let editItem = null, fEv = null, fEvDate = null;
+  function evOptions(){
+    // события в выбранный день и в ближайшие 30 дней; у повторов — только ближайший раз
+    const from = fDate || todayKey();
+    const seen = new Set(), out = [];
+    for (let i = 0; i < 31 && out.length < 10; i++) {
+      const k = key(addDays(parse(from), i));
+      itemsOn(k).filter(isEv).forEach(e => { const id = e.id + "|" + (e.rep ? "" : k); if (seen.has(e.id) && e.rep) return; if (seen.has(id)) return; seen.add(e.id); seen.add(id); out.push({ e, k }); });
+    }
+    if (fEv && !out.some(o => o.e.id === fEv && (!fEvDate || o.k === fEvDate))) {
+      const base = find(fEv); if (base) out.unshift({ e: base, k: fEvDate || base.date });
+    }
+    return out;
+  }
+  function renderEvLink(){
+    const g = $("evLinkGrp"), box = $("fEvLink");
+    const opts = fKind === "task" ? evOptions() : [];
+    g.hidden = !opts.length; box.innerHTML = "";
+    if (!opts.length) { fEv = null; fEvDate = null; return; }
+    const none = el("button", { type: "button", class: "chip plain", "aria-pressed": String(!fEv), text: "Без события" });
+    none.onclick = () => { fEv = null; fEvDate = null; renderEvLink(); };
+    box.append(none);
+    opts.forEach(({ e, k }) => {
+      const c = catOf(e.cat), d = parse(k);
+      const sameDay = k === fDate;
+      const when = (sameDay ? "" : DW[(d.getDay() + 6) % 7].toLowerCase() + " " + d.getDate() + " " + MS[d.getMonth()] + (e.time ? ", " : "")) + (e.time ? timeLabel(e) : (sameDay ? "весь день" : ""));
+      const b = el("button", { type: "button", class: "chip evchip", "aria-pressed": String(fEv === e.id && (!fEvDate || fEvDate === k)) }, el("span", { text: e.text }), when ? el("small", { text: " " + when }) : null);
+      b.style.setProperty("--c", c.c); b.style.setProperty("--pat", c.pat || c.c); b.style.setProperty("--plate", c.plate || "transparent"); b.style.setProperty("--fg", c.fg);
+      b.onclick = () => { fEv = e.id; fEvDate = k; if (!editing) { fCat = e.cat; renderChips(); } renderEvLink(); };
+      box.append(b);
+    });
+    $("evLinkHint").hidden = !fEv || !!fStart || fEvDate !== fDate;
+  }
   let fRep = { type: "none", days: [], until: null }, fScope = "one", cbStart = null, cbSel = new Set();
   const REPS = [["none", "Не повторять"], ["daily", "Каждый день"], ["weekdays", "По будням"], ["weekly", "Каждую неделю"], ["biweekly", "Раз в 2 недели"], ["monthly", "Каждый месяц"]];
   function renderRep(){
@@ -879,7 +1222,7 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
   };
   function formData(){
     const end = computedEnd();
-    return { text: $("fText").value.trim(), time: fStart || "", end: fStart ? end : "", cat: fCat, kind: fKind };
+    return { text: $("fText").value.trim(), time: fStart || "", end: fStart ? end : "", cat: fCat, kind: fKind, evId: fKind === "task" ? fEv : null, evDate: fKind === "task" && fEv ? fEvDate : null };
   }
   $("cbGo").onclick = () => {
     const d = formData(); if (!d.text) { $("fErr").textContent = "Сначала дай название."; return; }
@@ -900,7 +1243,7 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
     const box = $("fCats"); box.innerHTML = "";
     CATS.forEach(c => {
       const b = el("button", { type: "button", class: "chip", text: c.name, "aria-pressed": String(fCat === c.id) });
-      b.style.setProperty("--c", c.c); b.style.setProperty("--fg", c.fg);
+      b.style.setProperty("--c", c.c); b.style.setProperty("--pat", c.pat || c.c); b.style.setProperty("--plate", c.plate || "transparent"); b.style.setProperty("--fg", c.fg);
       b.onclick = () => { fCat = c.id; renderChips(); };
       box.append(b);
     });
@@ -914,8 +1257,8 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
   }
   document.querySelectorAll(".seg button").forEach(b => b.onclick = () => {
     fKind = b.dataset.kind;
-    fDur = fKind === "event" ? 540 : 60; $("fEndPick").hidden = true;
-    renderKind(); renderTime();
+    fDur = fKind === "event" ? 540 : 60; closePicker("fEndPick");
+    renderKind(); renderTime(); renderEvLink();
   });
 
   function dateChip(label, val, extra){
@@ -924,6 +1267,7 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
     return b;
   }
   function renderDates(){
+    if (typeof renderEvLink === "function" && $("fEvLink")) setTimeout(renderEvLink);
     const box = $("fDates"); box.innerHTML = "";
     const tk = todayKey(), tm = key(addDays(new Date(), 1));
     box.append(dateChip("Сегодня", tk), dateChip("Завтра", tm));
@@ -959,50 +1303,92 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
   $("dpNext").onclick = () => { dpMonth = new Date(dpMonth.getFullYear(), dpMonth.getMonth() + 1, 1); renderDP(); };
 
   function picker(box, value, onPick, { none = false } = {}){
-    box.innerHTML = "";
-    const h = value ? Number(value.slice(0, 2)) : null, m = value ? Number(value.slice(3, 5)) : null;
-    const grid = el("div", { class: "hours", role: "group", "aria-label": "Час" });
-    for (let i = 0; i < 24; i++) {
-      const hb = el("button", { type: "button", class: "hb", text: pad(i), "aria-pressed": String(h === i) });
-      hb.onclick = () => onPick(pad(i) + ":" + pad(m ?? 0), false);
-      grid.append(hb);
-    }
-    const mins_ = el("div", { class: "mins", role: "group", "aria-label": "Минуты" });
-    [0, 15, 30, 45].forEach(x => {
-      const mb = el("button", { type: "button", class: "mb", text: ":" + pad(x), "aria-pressed": String(m === x && h !== null) });
-      mb.onclick = () => onPick(pad(h ?? 9) + ":" + pad(x), true);
-      mins_.append(mb);
+    // барабан + ввод с клавиатуры; строится один раз при открытии
+    box.innerHTML = ""; box.dataset.built = "1";
+    const IT = 40;
+    if (!value) { const n = new Date(); let m = Math.ceil((n.getHours() * 60 + n.getMinutes()) / 15) * 15; if (m >= 24 * 60) m = 23 * 60 + 45; value = hm(m); onPick(value, false); }
+    let h = Number(value.slice(0, 2)), m = Number(value.slice(3, 5)), lock = false;
+    const inp = el("input", { class: "tpin", type: "text", inputmode: "numeric", autocomplete: "off", "aria-label": "Время, можно ввести с клавиатуры", placeholder: "чч:мм", maxlength: "5" });
+    inp.value = pad(h) + ":" + pad(m);
+    const mkWheel = (n, cur, label) => {
+      const w = el("div", { class: "wh", role: "listbox", "aria-label": label, tabindex: "0" });
+      for (let i = 0; i < n; i++) w.append(el("div", { class: "wi" + (i === cur ? " on" : ""), role: "option", text: pad(i) }));
+      return w;
+    };
+    const wh = mkWheel(24, h, "Часы"), wm = mkWheel(60, m, "Минуты");
+    const drum = el("div", { class: "drum" }, el("div", { class: "band", "aria-hidden": "true" }), wh, el("span", { class: "dsep", text: ":" }), wm);
+    const emit = () => { inp.value = pad(h) + ":" + pad(m); inp.classList.remove("bad"); onPick(pad(h) + ":" + pad(m), false); };
+    const mark = (w, i) => w.querySelectorAll(".wi").forEach((x, j) => x.classList.toggle("on", j === i));
+    const setScroll = (w, i, smooth) => { lock = true; w.scrollTo({ top: i * IT, behavior: smooth ? "smooth" : "auto" }); mark(w, i); setTimeout(() => lock = false, smooth ? 350 : 30); };
+    const bind = (w, max, set) => {
+      let t;
+      w.addEventListener("scroll", () => {
+        if (lock) return;
+        clearTimeout(t);
+        const i = Math.max(0, Math.min(max - 1, Math.round(w.scrollTop / IT))); mark(w, i);
+        t = setTimeout(() => { set(i); emit(); }, 90);
+      });
+      w.addEventListener("click", e => { const it = e.target.closest(".wi"); if (!it) return; const i = [...w.children].indexOf(it); set(i); setScroll(w, i, true); emit(); });
+      w.addEventListener("keydown", e => {
+        if (e.key !== "ArrowUp" && e.key !== "ArrowDown") return; e.preventDefault();
+        const cur = Math.round(w.scrollTop / IT), i = Math.max(0, Math.min(max - 1, cur + (e.key === "ArrowDown" ? 1 : -1)));
+        set(i); setScroll(w, i, true); emit();
+      });
+    };
+    bind(wh, 24, i => h = i); bind(wm, 60, i => m = i);
+    inp.addEventListener("input", () => {
+      const raw = inp.value.replace(/[^\d:]/g, "");
+      let hh, mm;
+      if (raw.includes(":")) { const [a1, b1] = raw.split(":"); if (a1 === "" || b1 === undefined || b1.length === 0) return; hh = Number(a1); mm = Number(b1.padEnd(2, "0").slice(0, 2)); if (b1.length < 2) return; }
+      else if (raw.length === 3) { hh = Number(raw[0]); mm = Number(raw.slice(1)); }
+      else if (raw.length === 4) { hh = Number(raw.slice(0, 2)); mm = Number(raw.slice(2)); }
+      else return;
+      if (hh > 23 || mm > 59) { inp.classList.add("bad"); return; }
+      inp.classList.remove("bad");
+      h = hh; m = mm; if (raw.length >= 4) inp.value = pad(h) + ":" + pad(m); setScroll(wh, h, true); setScroll(wm, m, true); onPick(pad(h) + ":" + pad(m), false);
     });
-    box.append(grid, mins_);
-    if (none) { const nb = el("button", { type: "button", class: "nonebtn", text: "Без времени" }); nb.onclick = () => onPick("", true); box.append(nb); }
+    inp.addEventListener("blur", () => { inp.classList.remove("bad"); inp.value = pad(h) + ":" + pad(m); });
+    inp.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); inp.blur(); onPick(pad(h) + ":" + pad(m), true); } });
+    const acts = el("div", { class: "tpacts" });
+    if (none) { const nb = el("button", { type: "button", class: "nonebtn", text: "Без времени" }); nb.onclick = () => onPick("", true); acts.append(nb); }
+    const ok = el("button", { type: "button", class: "b primary tpok", text: "Готово" }); ok.onclick = () => onPick(pad(h) + ":" + pad(m), true);
+    acts.append(el("span", { class: "sp" }), ok);
+    box.append(el("div", { class: "tphint", text: "Крути барабан или впиши время, например 1437" }), inp, drum, acts);
+    requestAnimationFrame(() => { setScroll(wh, h, false); setScroll(wm, m, false); });
   }
+  function closePicker(id){ const p = $(id); p.hidden = true; p.innerHTML = ""; p.dataset.built = ""; }
   function computedEnd(){
     if (!fStart) return "";
     if (fDur === "custom") return fEnd;
+    if (fDur === "eod") return "23:59";
     return hm(Math.min(mins(fStart) + fDur, 23 * 60 + 59));
   }
   function renderTime(){
     const sb = $("fStartBtn");
     sb.innerHTML = "";
     sb.append(el("span", { text: fStart || "Без времени" }), svg('<svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 5.5L7 9l3.5-3.5"/></svg>'));
-    sb.classList.toggle("empty", !fStart);
+    sb.classList.toggle("notime", !fStart);
+    if ($("evLinkHint")) $("evLinkHint").hidden = !fEv || !!fStart || fEvDate !== fDate;
     const end = computedEnd();
     $("fEndLbl").textContent = fStart ? (end ? "до " + end : "") : (fKind === "event" ? "на весь день" : "в течение дня");
     $("durGrp").hidden = !fStart;
     const box = $("fDur"); box.innerHTML = "";
     DURS[fKind].forEach(d => {
       const b = el("button", { type: "button", class: "chip plain", "aria-pressed": String(fDur === d), text: durLbl(d) });
-      b.onclick = () => { fDur = d; $("fEndPick").hidden = true; renderTime(); };
+      b.onclick = () => { fDur = d; closePicker("fEndPick"); renderTime(); };
       box.append(b);
     });
+    const eod = el("button", { type: "button", class: "chip plain", "aria-pressed": String(fDur === "eod"), text: "До конца дня" });
+    eod.onclick = () => { fDur = "eod"; closePicker("fEndPick"); renderTime(); };
+    box.append(eod);
     const cb = el("button", { type: "button", class: "chip plain", "aria-pressed": String(fDur === "custom"), text: "Своя" });
-    cb.onclick = () => { if (fDur !== "custom") { fEnd = computedEnd() || ""; fDur = "custom"; } const p = $("fEndPick"); p.hidden = !p.hidden; renderTime(); };
+    cb.onclick = () => { if (fDur !== "custom") { fEnd = computedEnd() || ""; fDur = "custom"; } const p = $("fEndPick"); if (!p.hidden) closePicker("fEndPick"); else p.hidden = false; renderTime(); };
     box.append(cb);
-    if (!$("fEndPick").hidden) picker($("fEndPick"), fEnd, (v, done) => { fEnd = v; if (done) $("fEndPick").hidden = true; renderTime(); });
-    if (!$("fStartPick").hidden) picker($("fStartPick"), fStart, (v, done) => { fStart = v; if (done) { $("fStartPick").hidden = true; sb.setAttribute("aria-expanded", "false"); } renderTime(); }, { none: true });
+    if (!$("fEndPick").hidden && !$("fEndPick").dataset.built) picker($("fEndPick"), fEnd, (v, done) => { fEnd = v; if (done) closePicker("fEndPick"); renderTime(); });
+    if (!$("fStartPick").hidden && !$("fStartPick").dataset.built) picker($("fStartPick"), fStart, (v, done) => { fStart = v; if (done) { closePicker("fStartPick"); $("fStartBtn").setAttribute("aria-expanded", "false"); } renderTime(); }, { none: true });
   }
   $("fStartBtn").onclick = () => {
-    const p = $("fStartPick"); p.hidden = !p.hidden;
+    const p = $("fStartPick"); if (!p.hidden) { closePicker("fStartPick"); $("fStartBtn").setAttribute("aria-expanded", "false"); renderTime(); return; } p.hidden = false;
     $("fStartBtn").setAttribute("aria-expanded", String(!p.hidden));
     renderTime();
   };
@@ -1027,13 +1413,15 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
     const endV = t ? (t.end || "") : (preset.end || "");
     if (fStart && endV) {
       const d = mins(endV) - mins(fStart);
-      if (DURS[fKind].includes(d)) fDur = d; else { fDur = "custom"; fEnd = endV; }
+      if (endV === "23:59") fDur = "eod"; else if (DURS[fKind].includes(d)) fDur = d; else { fDur = "custom"; fEnd = endV; }
     } else fDur = fKind === "event" ? 540 : 60;
-    $("fStartPick").hidden = true; $("fEndPick").hidden = true; $("fStartBtn").setAttribute("aria-expanded", "false");
+    closePicker("fStartPick"); closePicker("fEndPick"); $("fStartBtn").setAttribute("aria-expanded", "false");
     $("fDel").hidden = !t;
     $("fErr").textContent = "";
     fCat = t ? t.cat : (preset.cat || fCat);
-    renderKind(); renderDates(); renderTime(); renderChips(); renderRep(); renderScope();
+    fEv = t ? (t.evId || null) : (preset.evId || null);
+    fEvDate = t ? (t.evDate || (t.evId ? t.date : null)) : (preset.evDate || (preset.evId ? preset.date : null));
+    renderKind(); renderDates(); renderTime(); renderChips(); renderRep(); renderScope(); renderEvLink();
     dlg.showModal();
     setTimeout(() => $("fText").focus(), 30);
   }
@@ -1095,11 +1483,14 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
     const cat = catOf(t.cat);
     const tabbed = !outline && t.time;
     const c = el("div", { class: "card" + (tabbed ? " has-tab" : "") + (t.done ? " done" : "") });
-    c.style.setProperty("--c", cat.c); c.style.setProperty("--fg", cat.fg);
+    c.style.setProperty("--c", cat.c); c.style.setProperty("--pat", cat.pat || cat.c); c.style.setProperty("--plate", cat.plate || "transparent"); c.style.setProperty("--fg", cat.fg);
     if (tabbed) c.append(el("span", { class: "tabl", "aria-hidden": "true", text: timeLabel(t) }));
     const chk = el("button", { class: "chk", "aria-label": t.done ? "Вернуть в работу: " + t.text : "Выполнено: " + t.text, onclick: () => toggleDone(t) });
     chk.append(svg(ICON_CHECK));
-    const sub = [tabbed ? "" : timeLabel(t), cat.name.toLowerCase()].filter(Boolean).join(", ");
+    const evName = t.evId ? (state.tasks.find(e => e.id === t.evId) || {}).text : null;
+    let evWhen = "";
+    if (evName && t.evDate && t.evDate !== t.date) { const d = parse(t.evDate); evWhen = " (" + DW[(d.getDay() + 6) % 7].toLowerCase() + " " + d.getDate() + " " + MS[d.getMonth()] + ")"; }
+    const sub = [tabbed ? "" : timeLabel(t), evName ? "к событию «" + evName + "»" + evWhen : "", cat.name.toLowerCase()].filter(Boolean).join(", ");
     const main = el("button", { class: "main", "aria-label": "Изменить: " + t.text + (t.time ? ", " + timeLabel(t) : ""), onclick: () => openDialog(t) },
       el("span", { class: "ttl", text: t.text }), el("span", { class: "sub" }, t.rep ? svg(REP_ICON) : null, sub));
     c.append(chk);
@@ -1139,20 +1530,24 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
 
   const FLOWER = '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><g fill="var(--pink)" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="6" r="4.5"/><circle cx="18" cy="12" r="4.5"/><circle cx="12" cy="18" r="4.5"/><circle cx="6" cy="12" r="4.5"/></g><circle cx="12" cy="12" r="3" fill="var(--yellow)" stroke="currentColor" stroke-width="1.2"/></svg>';
   function sectionTitleM(text){ const p = sectionTitle(text); p.style.marginTop = "26px"; return p; }
-  function sectionTitle(text){ const p = el("p", { class: "section-title" }); p.append(svg(FLOWER), el("span", { text })); return p; }
+  const SNOWI = '<svg width="18" height="18" viewBox="0 0 40 40" aria-hidden="true" style="color:var(--ring)"><use href="#ill-snow"/></svg>';
+  function sectionTitle(text){ const p = el("p", { class: "section-title" }); p.append(svg(season === "winter" ? SNOWI : FLOWER), el("span", { text })); return p; }
 
+  const linkMatch = (t, e) => t.evId === e.id && (!t.evDate || t.evDate === e.date) && t.date === e.date;
+  const linkedTo = (ev, items) => items.filter(t => isTask(t) && !t.time && linkMatch(t, ev));
+  const isLinkedHere = (t, items) => isTask(t) && !t.time && t.evId && items.some(e => isEv(e) && linkMatch(t, e));
   function eventBox(ev, inner){
     const cat = catOf(ev.cat);
     const box = el("div", { class: "evbox" + (ev.time ? "" : " allday") });
-    box.style.setProperty("--c", cat.c); box.style.setProperty("--fg", cat.fg);
+    box.style.setProperty("--c", cat.c); box.style.setProperty("--pat", cat.pat || cat.c); box.style.setProperty("--plate", cat.plate || "transparent"); box.style.setProperty("--fg", cat.fg);
     const head = el("button", { class: "evhead", "aria-label": "Изменить событие: " + ev.text, onclick: () => openDialog(ev) },
       el("span", { class: "evtime", text: ev.time ? timeLabel(ev) : "весь день" }),
       el("b", { text: ev.text }), el("span", { class: "evcat" }, ev.rep ? svg(REP_ICON) : null, cat.name.toLowerCase()));
     box.append(head);
     if (inner && inner.length) box.append(el("div", { class: "evin" }, inner));
     else if (ev.time) {
-      const add = el("button", { class: "evadd", onclick: () => openDialog(null, { date: ev.date, start: ev.time, cat: ev.cat }) });
-      add.append(svg(ICON_PLUS), el("span", { text: "Добавить задачу сюда" }));
+      const add = el("button", { class: "evadd", onclick: () => openDialog(null, { date: ev.date, cat: ev.cat, evId: ev.id, evDate: ev.date }) });
+      add.append(svg(ICON_PLUS), el("span", { text: "Добавить задачу к событию" }));
       box.append(add);
     }
     return box;
@@ -1163,10 +1558,10 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
     root.append(renderStrip());
     const all = itemsOn(selected);
     const allDayEv = all.filter(t => isEv(t) && !t.time);
-    const loose = all.filter(t => isTask(t) && !t.time).sort(sortT);
+    const loose = all.filter(t => isTask(t) && !t.time && !isLinkedHere(t, all)).sort(sortT);
     if (allDayEv.length || loose.length) {
       root.append(sectionTitle("В течение дня"));
-      root.append(el("div", { class: "loose" }, allDayEv.map(e => eventBox(e)), loose.map(t => card(t, { outline: true }))));
+      root.append(el("div", { class: "loose" }, allDayEv.map(e => eventBox(e, linkedTo(e, all).sort(sortT).map(t => card(t, { outline: true })))), loose.map(t => card(t, { outline: true }))));
     }
     root.append(zoomBar());
     const tk = todayKey(), H = ZOOMS[zoom].h, MINPX = 46, EVHEAD = 20;
@@ -1243,16 +1638,31 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
       openDialog(null, { date: k, start: f(m), end: f(Math.min(m + 60, 23 * 60 + 59)) });
     };
     const bgs = byDay[k].filter(t => t.time && isEv(t));
+    const headH = e => EVHEAD + linkedTo(e, items).length * 24;
     bgs.forEach(t => {
       const c = catOf(t.cat), s0 = mins(t.time), e0 = Math.max(mins(t.end) ?? s0 + 60, s0 + 20);
-      const b = el("button", { class: "bgev", title: t.text + ", " + timeLabel(t), "aria-label": "Событие: " + t.text + ", " + timeLabel(t), onclick: () => openDialog(t),
-        style: "top:" + ((s0 - minH * 60) / 60 * H) + "px;height:" + ((e0 - s0) / 60 * H - 2) + "px" }, el("b", { text: t.text }));
-      b.style.setProperty("--c", c.c); b.style.setProperty("--fg", c.fg);
+      const b = el("div", { class: "bgev", style: "top:" + ((s0 - minH * 60) / 60 * H) + "px;height:" + ((e0 - s0) / 60 * H - 2) + "px" },
+        el("button", { class: "bglbl", title: t.text + ", " + timeLabel(t), "aria-label": "Событие: " + t.text + ", " + timeLabel(t), onclick: () => openDialog(t) }, el("b", { text: t.text })));
+      const links = linkedTo(t, items).sort(sortT);
+      if (links.length) {
+        const lb = el("div", { class: "bglinks" });
+        links.forEach(x => {
+          const cx = catOf(x.cat);
+          const p = el("button", { class: "pill" + (x.done ? " done" : ""), text: x.text, title: x.text, onclick: () => openDialog(x) });
+          const w = el("div", { class: "pillw has-chk" + (x.done ? " done" : "") }, p);
+          const ck = el("button", { class: "pchk", "aria-label": (x.done ? "Вернуть в работу: " : "Выполнено: ") + x.text, onclick: () => toggleDone(x) }); ck.append(svg(ICON_CHECK)); w.append(ck);
+          w.style.setProperty("--c", cx.c); w.style.setProperty("--pat", cx.pat || cx.c); w.style.setProperty("--plate", cx.plate || "transparent"); w.style.setProperty("--fg", cx.fg);
+          makeDraggable(w, x, "pill");
+          lb.append(w);
+        });
+        b.append(lb);
+      }
+      b.style.setProperty("--c", c.c); b.style.setProperty("--pat", c.pat || c.c); b.style.setProperty("--plate", c.plate || "transparent"); b.style.setProperty("--fg", c.fg);
       makeDraggable(b, t, "grid");
       col.append(b);
     });
     const inEv = s0 => bgs.some(e => s0 >= mins(e.time) && s0 < (mins(e.end) ?? mins(e.time) + 60));
-    const hostTop = s0 => { const h = bgs.find(e => s0 >= mins(e.time) && s0 < (mins(e.end) ?? mins(e.time) + 60)); return h ? (mins(h.time) - minH * 60) / 60 * H + EVHEAD : -1e9; };
+    const hostTop = s0 => { const h = bgs.find(e => s0 >= mins(e.time) && s0 < (mins(e.end) ?? mins(e.time) + 60)); return h ? (mins(h.time) - minH * 60) / 60 * H + headH(h) : -1e9; };
     const evts = layoutDay(byDay[k].filter(t => t.time && isTask(t)).map(t => ({ t, s: mins(t.time), e: Math.max(mins(t.end) ?? mins(t.time) + 60, mins(t.time) + 5) })));
     // short items get a minimum height; following items in the same lane shift down instead of overlapping
     const laneBottom = {};
@@ -1278,7 +1688,7 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
           rowMode ? el("span", { class: "evt", text: timeLabel(t) }) : null, el("b", { text: t.text, style: "-webkit-line-clamp:" + lines }), showTime && !rowMode ? el("span", { text: timeLabel(t) }) : null));
       const ck = el("button", { class: "evchk", "aria-label": (t.done ? "Вернуть в работу: " : "Выполнено: ") + t.text, title: t.done ? "Вернуть в работу" : "Отметить выполненной", onclick: () => toggleDone(t) });
       ck.append(svg(ICON_CHECK)); b.append(ck);
-      b.style.setProperty("--c", c.c); b.style.setProperty("--fg", c.fg);
+      b.style.setProperty("--c", c.c); b.style.setProperty("--pat", c.pat || c.c); b.style.setProperty("--plate", c.plate || "transparent"); b.style.setProperty("--fg", c.fg);
       makeDraggable(b, t, "grid");
       col.append(b);
     });
@@ -1312,7 +1722,7 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
       head.append(el("button", { class: "h" + (k === tk ? " today" : ""), "aria-label": "Открыть " + d.getDate() + " " + MF[d.getMonth()], onclick: () => { selected = k; view = "day"; render(); } },
         el("span", { text: DW[i] }), el("b", { text: d.getDate() })));
 
-      const loose = byDay[k].filter(t => !t.time).sort(sortT);
+      const loose = byDay[k].filter(t => !t.time && !isLinkedHere(t, byDay[k])).sort(sortT);
       const cell = el("div", { class: "cell", "data-k": k });
       loose.sort((a, b) => isEv(b) - isEv(a));
       loose.slice(0, 2).forEach(t => {
@@ -1320,7 +1730,7 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
         const p = el("button", { class: "pill" + (isEv(t) ? " evpill" : "") + (t.done ? " done" : ""), text: t.text, title: t.text, onclick: () => openDialog(t) });
         const w = el("div", { class: "pillw" + (isEv(t) ? "" : " has-chk") + (t.done ? " done" : "") }, p);
         if (!isEv(t)) { const ck = el("button", { class: "pchk", "aria-label": (t.done ? "Вернуть в работу: " : "Выполнено: ") + t.text, title: t.done ? "Вернуть в работу" : "Отметить выполненной", onclick: () => toggleDone(t) }); ck.append(svg(ICON_CHECK)); w.append(ck); }
-        w.style.setProperty("--c", c.c); w.style.setProperty("--fg", c.fg);
+        w.style.setProperty("--c", c.c); w.style.setProperty("--pat", c.pat || c.c); w.style.setProperty("--plate", c.plate || "transparent"); w.style.setProperty("--fg", c.fg);
         makeDraggable(w, t, "pill");
         cell.append(w);
       });
@@ -1360,7 +1770,7 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
           t.time && !isEv(t) ? el("span", { class: "mt", text: t.time }) : null, el("span", { class: "mx", text: t.text }));
         const w = el("div", { class: "pillw" + (isEv(t) ? "" : " has-chk") + (t.done ? " done" : "") }, p);
         if (!isEv(t)) { const ck = el("button", { class: "pchk", "aria-label": (t.done ? "Вернуть в работу: " : "Выполнено: ") + t.text, title: t.done ? "Вернуть в работу" : "Отметить выполненной", onclick: () => toggleDone(t) }); ck.append(svg(ICON_CHECK)); w.append(ck); }
-        w.style.setProperty("--c", c.c); w.style.setProperty("--fg", c.fg);
+        w.style.setProperty("--c", c.c); w.style.setProperty("--pat", c.pat || c.c); w.style.setProperty("--plate", c.plate || "transparent"); w.style.setProperty("--fg", c.fg);
         makeDraggable(w, t, "pill");
         pills.append(w);
       });
@@ -1422,7 +1832,7 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
         const row = el("button", { class: "series" + (isEv(t) ? " is-ev" : ""), "aria-label": "Изменить все повторы: " + t.text, onclick: () => openDialog(t) },
           el("span", { class: "sx" }, el("b", { text: t.text }), el("span", { text: [repText(t.rep), timeLabel(t), c.name.toLowerCase()].filter(Boolean).join(", ") })),
           svg(REP_ICON));
-        row.style.setProperty("--c", c.c); row.style.setProperty("--fg", c.fg);
+        row.style.setProperty("--c", c.c); row.style.setProperty("--pat", c.pat || c.c); row.style.setProperty("--plate", c.plate || "transparent"); row.style.setProperty("--fg", c.fg);
         list.append(row);
       });
       root.append(list);
@@ -1431,13 +1841,31 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
     root.append(el("button", { class: "b datebtn", onclick: openData, text: "Перенос дел в другую версию" }));
   }
 
+  function paintTitle(){
+    const h = document.getElementById("hDate"); const txt = h.textContent;
+    h.innerHTML = ""; let i = 0;
+    for (const ch of txt) { const sp = document.createElement("span"); sp.textContent = ch; if (ch.trim()) sp.className = "lc" + (i++ % 5); h.append(sp); }
+    h.setAttribute("aria-label", txt);
+    fitTitle();
+  }
+  function fitTitle(){
+    const h = document.getElementById("hDate"); if (!h) return;
+    let size = window.innerWidth < 600 ? 52 : 66;
+    h.style.fontSize = size + "px";
+    const max = h.clientWidth - 4;
+    const cw = () => { const r = document.createRange(); r.selectNodeContents(h); return r.getBoundingClientRect().width; };
+    while (cw() > max && size > 24) { size -= 2; h.style.fontSize = size + "px"; }
+  }
+  window.addEventListener("resize", () => fitTitle());
+  if (document.fonts) document.fonts.ready.then(() => fitTitle());
+
   function render(){
     const sd = parse(selected), tk = todayKey();
     const ws = monday(sd);
     if (view === "week") {
       const we = addDays(weekStart, 6);
       document.getElementById("hWd").textContent = "Неделя";
-      document.getElementById("hDate").textContent = weekStart.getDate() + "–" + we.getDate() + " " + MS[we.getMonth()];
+      document.getElementById("hDate").textContent = weekStart.getMonth() === we.getMonth() ? weekStart.getDate() + "–" + we.getDate() + " " + MF[we.getMonth()] : weekStart.getDate() + " " + MS[weekStart.getMonth()] + " – " + we.getDate() + " " + MS[we.getMonth()];
     } else if (view === "month") {
       const me = addDays(monthStart, 34);
       document.getElementById("hWd").textContent = "5 недель" + (me.getFullYear() !== new Date().getFullYear() ? ", " + me.getFullYear() : "");
@@ -1448,18 +1876,19 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
     } else {
       const rel = selected === tk ? "Сегодня, " : selected === key(addDays(new Date(), 1)) ? "Завтра, " : "";
       document.getElementById("hWd").textContent = rel + (rel ? WD[sd.getDay()].toLowerCase() : WD[sd.getDay()]);
-      document.getElementById("hDate").textContent = sd.getDate() + " " + MS[sd.getMonth()];
+      document.getElementById("hDate").textContent = sd.getDate() + " " + MF[sd.getMonth()];
     }
     document.querySelectorAll(".tab").forEach(b => b.setAttribute("aria-selected", String(b.dataset.view === view)));
     document.getElementById("nav").style.visibility = view === "inbox" ? "hidden" : "visible";
     document.getElementById("fabLbl").textContent = view === "inbox" ? "Добавить задачу" : "Добавить в расписание";
+    paintTitle();
     document.body.classList.toggle("wide", view === "week" || view === "month");
     const root = document.getElementById("view"); root.innerHTML = "";
     if (view === "day") renderDay(root); else if (view === "week") renderWeek(root); else if (view === "month") renderMonth(root); else renderInbox(root);
   }
 
   // ---------- events ----------
-  document.querySelectorAll(".tab").forEach(b => b.onclick = () => { view = b.dataset.view; if (view === "week") weekStart = monday(parse(selected)); if (view === "month") monthStart = monday(parse(selected)); render(); });
+  document.querySelectorAll(".tab").forEach(b => b.onclick = () => { window.scrollTo(0, 0); view = b.dataset.view; if (view === "week") weekStart = monday(parse(selected)); if (view === "month") monthStart = monday(parse(selected)); render(); });
   document.getElementById("prev").onclick = () => { if (view === "month") { monthStart = addDays(monthStart, -28); selected = key(monthStart); render(); return; } if (view === "week") { weekStart = addDays(weekStart, -7); selected = key(weekStart); } else selected = key(addDays(parse(selected), -1)); render(); };
   document.getElementById("next").onclick = () => { if (view === "month") { monthStart = addDays(monthStart, 28); selected = key(monthStart); render(); return; } if (view === "week") { weekStart = addDays(weekStart, 7); selected = key(weekStart); } else selected = key(addDays(parse(selected), 1)); render(); };
   document.getElementById("toToday").onclick = () => { selected = todayKey(); weekStart = monday(new Date()); monthStart = monday(new Date()); render(); };
@@ -1520,6 +1949,7 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
   function makeDraggable(node, t, kind){
     node.addEventListener("pointerdown", e => {
       if (e.button !== 0) return;
+      e.stopPropagation();
       if (e.target.closest(".evchk, .pchk")) return;
       const r = node.getBoundingClientRect();
       drag = { t, kind, node, x0: e.clientX, y0: e.clientY, grabY: kind === "grid" ? e.clientY - r.top : 0, active: false, touch: e.pointerType !== "mouse", timer: null, pid: e.pointerId };
@@ -1531,7 +1961,7 @@ body.dragging,body.dragging *{cursor:grabbing!important;user-select:none}
     const g = n.cloneNode(true);
     g.classList.add("ghost");
     g.style.cssText += ";position:fixed;left:" + r.left + "px;top:" + r.top + "px;width:" + r.width + "px;height:" + r.height + "px;margin:0";
-    g.style.setProperty("--c", n.style.getPropertyValue("--c")); g.style.setProperty("--fg", n.style.getPropertyValue("--fg"));
+    g.style.setProperty("--c", n.style.getPropertyValue("--c")); g.style.setProperty("--pat", n.style.getPropertyValue("--pat")); g.style.setProperty("--plate", n.style.getPropertyValue("--plate")); g.style.setProperty("--fg", n.style.getPropertyValue("--fg"));
     const tip = el("span", { class: "ghost-tip" }); g.append(tip);
     document.body.append(g);
     drag.ghost = g; drag.tip = tip; drag.dx = x - r.left; drag.dy = y - r.top; drag.active = true;
