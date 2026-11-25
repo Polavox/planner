@@ -736,6 +736,29 @@ dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px
 .evopt small{color:var(--muted);font-size:13px}
 .chip.evchip{background:color-mix(in srgb,var(--c) 14%,var(--surface));box-shadow:inset 3px 0 0 var(--c)}
 
+/* category colours: work = blue, personal = purple */
+:root{--peach:#5B86E5;--pat-peach:repeating-conic-gradient(#7C9FEE 0 25%,#DFE8FC 0 50%) 0 0/18px 18px;--pink:#A27CF0;--pat-pink:repeating-linear-gradient(90deg,#A27CF0 0 12px,#DCCEFB 12px 24px)}
+:root[data-season="winter"]{
+  --peach:#2F5BD3; --pat-peach:repeating-linear-gradient(135deg,#2F5BD3 0 8px,#EEF2FD 8px 16px);
+  --pink:#8E5BE0; --pat-pink:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Crect width='28' height='28' fill='%238E5BE0'/%3E%3Cg stroke='%23F6F0FF' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='M8 3v10M3 8h10M4.5 4.5l7 7M11.5 4.5l-7 7'/%3E%3Cpath d='M21 16v8M17 20h8M18 17l6 6M24 17l-6 6'/%3E%3C/g%3E%3C/svg%3E");
+  --mint:#D63441; --pat-mint:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Crect width='28' height='28' fill='%23D63441'/%3E%3Cpath d='M7 3l5 8H9l4 6H1l4-6H2z' fill='%23FFE3E6'/%3E%3Cpath d='M21 15l4 6h-2l3 5h-10l3-5h-2z' fill='%23FFE3E6'/%3E%3C/svg%3E");
+}
+/* header colour override */
+:root[data-headc]{--head:var(--head-user);--head-ink:var(--head-ink-user);--head-muted:var(--head-muted-user)}
+@media (prefers-color-scheme:dark){:root[data-headc]:not([data-theme="light"]){--head:color-mix(in srgb,var(--head-user) 68%,#141018)}}
+:root[data-headc][data-theme="dark"]{--head:color-mix(in srgb,var(--head-user) 68%,#141018)}
+:root[data-headc] .top .wd{color:var(--head-ink)}
+:root[data-headc] .head{color:var(--head-ink)}
+.swatches{display:flex;flex-wrap:wrap;gap:8px}
+.sw{width:38px;height:38px;border-radius:50%;border:2px solid var(--stroke);padding:0;font-weight:800;color:var(--ink);background:var(--surface)}
+.sw[aria-checked="true"]{box-shadow:0 0 0 3px var(--surface),0 0 0 5px var(--ring)}
+.pets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.petopt{border:2px solid var(--line);border-radius:16px;background:var(--surface);padding:6px 4px 6px;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--ink)}
+.petopt svg{width:100%;height:48px}
+.petopt small{font-size:12px;font-weight:600}
+.petopt[aria-checked="true"]{border-color:var(--stroke);background:var(--raised)}
+.nopet{height:48px;display:grid;place-items:center;font-size:24px;color:var(--muted)}
+
 .login{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:24px;background:var(--head)}
 .login[hidden]{display:none}
 .login-card{background:var(--surface);border-radius:28px;padding:32px 26px;max-width:380px;width:100%;text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center;box-shadow:0 10px 40px rgba(20,30,60,.15)}
@@ -764,6 +787,64 @@ dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px
   <path d="M22 64 Q16 100 30 126 L60 126 Q74 100 68 64Z" fill="url(#ill-chk)" stroke="#2A1E1A" stroke-width="2.5"/></g></symbol>
  <symbol id="ill-tree" viewBox="0 0 90 130"><g filter="url(#wob)"><path d="M45 4 L70 46 H58 L80 84 H62 L86 116 H4 L28 84 H10 L32 46 H20Z" fill="#2F9A5E" stroke="#2A1E1A" stroke-width="2.5" stroke-linejoin="round"/><rect x="38" y="116" width="14" height="12" fill="#8A5A3C" stroke="#2A1E1A" stroke-width="2"/><path d="M45 0l3 6 6 .5-4.5 4 1.5 6L45 13l-6 3.5 1.5-6L36 6.5l6-.5z" fill="#F2B33D"/><circle cx="34" cy="62" r="4" fill="#D63441"/><circle cx="56" cy="74" r="4" fill="#F28A2E"/><circle cx="40" cy="98" r="4" fill="#FFFDF8"/><circle cx="62" cy="104" r="4" fill="#3D6FD8"/><circle cx="26" cy="104" r="4" fill="#F2B33D"/></g></symbol>
  <symbol id="ill-snow" viewBox="0 0 40 40"><g stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none" filter="url(#wob)"><path d="M20 3v34M3 20h34M8 8l24 24M32 8L8 32"/><path d="M15 5l5 5 5-5M15 35l5-5 5 5M5 15l5 5-5 5M35 15l-5 5 5 5"/></g></symbol>
+ <symbol id="pet-cat" viewBox="0 0 210 120"><g filter="url(#wob)">
+  <path d="M20 110 Q10 70 60 62 L150 60 Q195 62 190 100 Q185 116 160 114 L40 116 Q22 116 20 110Z" fill="currentColor"/>
+  <circle cx="60" cy="58" r="34" fill="currentColor"/><path d="M32 40 L30 8 L54 30Z M72 28 L92 6 L90 42Z" fill="currentColor"/>
+  <ellipse cx="48" cy="58" rx="8" ry="9" fill="#F7C948"/><ellipse cx="74" cy="58" rx="8" ry="9" fill="#F7C948"/>
+  <ellipse cx="49" cy="59" rx="2.5" ry="6" fill="#1E1714"/><ellipse cx="75" cy="59" rx="2.5" ry="6" fill="#1E1714"/>
+  <path d="M58 72 l3 3 l3 -3" stroke="#F07FA0" stroke-width="3" fill="none"/>
+  <path d="M188 96 Q215 70 196 48" stroke="currentColor" stroke-width="14" fill="none" stroke-linecap="round"/></g></symbol>
+ <symbol id="pet-cat-light" viewBox="0 0 210 120"><g filter="url(#wob)">
+  <path d="M20 110 Q10 70 60 62 L150 60 Q195 62 190 100 Q185 116 160 114 L40 116 Q22 116 20 110Z" fill="currentColor" stroke="#2A1E1A" stroke-width="2.5"/>
+  <path d="M188 96 Q215 70 196 48" stroke="#2A1E1A" stroke-width="17" fill="none" stroke-linecap="round"/><path d="M188 96 Q215 70 196 48" stroke="currentColor" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <path d="M32 40 L30 8 L54 30Z M72 28 L92 6 L90 42Z" fill="currentColor" stroke="#2A1E1A" stroke-width="2.5" stroke-linejoin="round"/>
+  <circle cx="60" cy="58" r="34" fill="currentColor" stroke="#2A1E1A" stroke-width="2.5"/>
+  <path d="M36 14 L38 30 L48 28Z M86 12 L84 34 L76 28Z" fill="#F7A9BC"/>
+  <path d="M110 64 q6 20 0 48 M135 62 q6 22 0 50 M160 64 q5 20 0 46" stroke="var(--pet-stripe,transparent)" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <ellipse cx="48" cy="58" rx="7" ry="8" fill="#4FA36A"/><ellipse cx="74" cy="58" rx="7" ry="8" fill="#4FA36A"/>
+  <ellipse cx="49" cy="59" rx="2.3" ry="5.5" fill="#1E1714"/><ellipse cx="75" cy="59" rx="2.3" ry="5.5" fill="#1E1714"/>
+  <path d="M58 72 l3 3 l3 -3" stroke="#E86F8F" stroke-width="3" fill="none"/>
+  <path d="M28 70 h-16 M28 76 h-14 M94 70 h16 M94 76 h14" stroke="#2A1E1A" stroke-width="1.5"/></g></symbol>
+ <symbol id="pet-corgi" viewBox="0 0 210 120"><g filter="url(#wob)" stroke="#2A1E1A" stroke-width="2.5" stroke-linejoin="round">
+  <path d="M182 82 q18 -10 14 -26 q-12 6 -18 14Z" fill="#E8913E"/>
+  <path d="M30 108 Q22 74 68 66 L150 64 Q192 66 188 100 Q184 116 160 114 L44 116 Q30 116 30 108Z" fill="#E8913E"/>
+  <path d="M40 112 q20 -26 50 -30 q-4 18 -14 34Z" fill="#FFF6E8" stroke="none"/>
+  <path d="M36 44 L30 4 L60 28Z M84 26 L104 0 L102 44Z" fill="#E8913E"/>
+  <path d="M38 34 L35 14 L50 28Z M88 28 L99 12 L98 36Z" fill="#F7B9A8" stroke="none"/>
+  <ellipse cx="68" cy="58" rx="36" ry="32" fill="#E8913E"/>
+  <path d="M68 40 q-14 22 -24 40 q24 12 48 0 q-10 -18 -24 -40Z" fill="#FFF6E8" stroke="none"/>
+  <circle cx="54" cy="56" r="4.5" fill="#1E1714" stroke="none"/><circle cx="82" cy="56" r="4.5" fill="#1E1714" stroke="none"/>
+  <ellipse cx="68" cy="72" rx="6" ry="4.5" fill="#1E1714" stroke="none"/><path d="M68 76 q-4 6 -9 4 M68 76 q4 6 9 4" fill="none" stroke-width="2"/>
+  <path d="M64 80 q4 10 8 0" fill="#F27C9B" stroke-width="1.8"/></g></symbol>
+ <symbol id="pet-bunny" viewBox="0 0 210 120"><g filter="url(#wob)" stroke="#2A1E1A" stroke-width="2.5" stroke-linejoin="round">
+  <circle cx="178" cy="92" r="13" fill="#FFFDF8"/>
+  <path d="M40 112 Q24 64 90 58 Q170 52 176 96 Q178 116 150 116 L56 116 Q42 116 40 112Z" fill="currentColor"/>
+  <path d="M52 40 Q40 -6 58 -2 Q72 4 70 40Z M76 40 Q86 -4 102 4 Q112 14 90 46Z" fill="currentColor"/>
+  <path d="M56 34 Q50 8 58 6 Q64 10 64 34Z M82 36 Q92 10 98 12 Q100 18 88 40Z" fill="#F7A9BC" stroke="none"/>
+  <ellipse cx="70" cy="66" rx="32" ry="28" fill="currentColor"/>
+  <circle cx="58" cy="64" r="4.5" fill="#1E1714" stroke="none"/><circle cx="84" cy="64" r="4.5" fill="#1E1714" stroke="none"/>
+  <path d="M67 74 l3 3 l3 -3" stroke="#E86F8F" stroke-width="3" fill="none"/>
+  <circle cx="50" cy="76" r="5" fill="#F7A9BC" stroke="none" opacity=".7"/><circle cx="92" cy="76" r="5" fill="#F7A9BC" stroke="none" opacity=".7"/></g></symbol>
+ <symbol id="pet-fox" viewBox="0 0 210 120"><g filter="url(#wob)" stroke="#2A1E1A" stroke-width="2.5" stroke-linejoin="round">
+  <path d="M176 106 Q214 92 204 54 Q190 40 176 58 Q170 80 160 98Z" fill="#E8742E"/><path d="M204 54 Q194 44 184 52 Q192 60 202 62Z" fill="#FFFDF8"/>
+  <path d="M28 110 Q18 70 66 64 L148 62 Q186 64 182 100 Q178 116 154 114 L42 116 Q28 116 28 110Z" fill="#E8742E"/>
+  <path d="M30 42 L28 2 L58 28Z M78 28 L102 2 L98 44Z" fill="#E8742E"/>
+  <path d="M34 34 L33 14 L48 28Z M84 28 L96 12 L94 36Z" fill="#2A1E1A" stroke="none"/>
+  <path d="M24 54 Q30 30 62 30 Q94 30 100 54 Q90 84 62 96 Q34 84 24 54Z" fill="#E8742E"/>
+  <path d="M24 54 Q40 62 62 96 Q34 84 24 54Z M100 54 Q84 62 62 96 Q90 84 100 54Z" fill="#FFFDF8"/>
+  <path d="M50 58 q4 -5 8 0 M68 58 q4 -5 8 0" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="62" cy="86" rx="5" ry="4" fill="#1E1714" stroke="none"/></g></symbol>
+ <symbol id="pet-penguin" viewBox="0 0 210 120"><g filter="url(#wob)" stroke="#2A1E1A" stroke-width="2.5" stroke-linejoin="round">
+  <path d="M150 112 l20 6 l-4 -12Z M166 104 l22 4 l-6 -12Z" fill="#F2A23A"/>
+  <path d="M28 106 Q22 70 64 58 Q130 46 170 82 Q186 100 170 112 Q120 122 50 118 Q30 116 28 106Z" fill="#26303F"/>
+  <path d="M48 112 Q60 84 110 80 Q156 82 166 104 Q120 114 48 112Z" fill="#FFFDF8" stroke="none"/>
+  <path d="M120 78 q22 4 34 22" fill="none" stroke="#26303F" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="62" cy="60" r="30" fill="#26303F"/>
+  <path d="M44 58 Q48 38 64 38 Q82 38 84 58 Q80 78 64 80 Q46 78 44 58Z" fill="#FFFDF8" stroke="none"/>
+  <circle cx="56" cy="58" r="4" fill="#1E1714" stroke="none"/><circle cx="74" cy="58" r="4" fill="#1E1714" stroke="none"/>
+  <path d="M60 66 l5 8 l5 -8Z" fill="#F2A23A" stroke-width="1.8"/>
+  <circle cx="50" cy="68" r="4.5" fill="#F7A9BC" stroke="none" opacity=".75"/><circle cx="80" cy="68" r="4.5" fill="#F7A9BC" stroke="none" opacity=".75"/></g></symbol>
+
  <symbol id="ill-cat" viewBox="0 0 210 120"><g filter="url(#wob)">
   <path d="M20 110 Q10 70 60 62 L150 60 Q195 62 190 100 Q185 116 160 114 L40 116 Q22 116 20 110Z" fill="#1E1714"/>
   <circle cx="60" cy="58" r="34" fill="#1E1714"/><path d="M32 40 L30 8 L54 30Z M72 28 L92 6 L90 42Z" fill="#1E1714"/>
@@ -782,7 +863,7 @@ dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px
       <button class="round" id="themeBtn" aria-label="Тема"></button>
     </div>
     <div class="when"><h1 id="hDate"></h1>
-      <svg class="hcat-d" viewBox="0 0 210 120" aria-hidden="true"><use href="#ill-cat"/><g class="scarf"><path d="M40 80 Q60 92 84 80 L88 92 Q60 104 36 92Z M70 88 l8 26 l12 -4 l-8 -24Z" fill="#D63441" stroke="#2A1E1A" stroke-width="2"/><path d="M74 96h12M77 104h12" stroke="#FFFDF8" stroke-width="2"/></g></svg>
+      <svg class="hcat-d" viewBox="0 0 210 120" aria-hidden="true"><use class="petuse" href="#pet-cat"/><g class="scarf"><path d="M40 80 Q60 92 84 80 L88 92 Q60 104 36 92Z M70 88 l8 26 l12 -4 l-8 -24Z" fill="#D63441" stroke="#2A1E1A" stroke-width="2"/><path d="M74 96h12M77 104h12" stroke="#FFFDF8" stroke-width="2"/></g></svg>
       <svg class="hdeco" width="80" height="100" viewBox="0 0 90 130" aria-hidden="true"><use href="#ill-vase"/></svg>
     </div>
     <div class="bar">
@@ -800,7 +881,7 @@ dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px
       </div>
     </div>
   </div>
-  <svg class="hcat" viewBox="0 0 210 120" aria-hidden="true"><use href="#ill-cat"/><g class="scarf"><path d="M40 80 Q60 92 84 80 L88 92 Q60 104 36 92Z M70 88 l8 26 l12 -4 l-8 -24Z" fill="#D63441" stroke="#2A1E1A" stroke-width="2"/><path d="M74 96h12M77 104h12" stroke="#FFFDF8" stroke-width="2"/></g></svg>
+  <svg class="hcat" viewBox="0 0 210 120" aria-hidden="true"><use class="petuse" href="#pet-cat"/><g class="scarf"><path d="M40 80 Q60 92 84 80 L88 92 Q60 104 36 92Z M70 88 l8 26 l12 -4 l-8 -24Z" fill="#D63441" stroke="#2A1E1A" stroke-width="2"/><path d="M74 96h12M77 104h12" stroke="#FFFDF8" stroke-width="2"/></g></svg>
   <svg class="hstar s1" aria-hidden="true"><use href="#ill-star"/></svg><svg class="hflower f1" aria-hidden="true"><use href="#ill-flower"/></svg><svg class="hflower f2" aria-hidden="true"><use href="#ill-flower"/></svg><svg class="hstar s2" aria-hidden="true"><use href="#ill-heart"/></svg>
   <svg class="wave" viewBox="0 0 400 18" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0H400V6Q393.3 18 386.7 6T373.3 6T360 6T346.7 6T333.3 6T320 6T306.7 6T293.3 6T280 6T266.7 6T253.3 6T240 6T226.7 6T213.3 6T200 6T186.7 6T173.3 6T160 6T146.7 6T133.3 6T120 6T106.7 6T93.3 6T80 6T66.7 6T53.3 6T40 6T26.7 6T13.3 6T0 6Z"/></svg>
 </header>
@@ -816,6 +897,10 @@ dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px
     <h2 id="bgTitle">Оформление</h2>
     <span class="glbl">Тема</span>
     <div class="seg" id="seasonSeg" role="radiogroup" aria-label="Тема"><button type="button" role="radio" data-season="normal">Обычная</button><button type="button" role="radio" data-season="winter">Новогодняя</button></div>
+    <span class="glbl">Цвет шапки</span>
+    <div class="swatches" id="headList" role="radiogroup" aria-label="Цвет шапки"></div>
+    <span class="glbl">Животное в шапке</span>
+    <div class="pets" id="petList" role="radiogroup" aria-label="Животное"></div>
     <span class="glbl">Фон</span>
     <div class="bgs" id="bgList"></div>
     <span class="glbl">Аккаунт</span>
@@ -1007,14 +1092,55 @@ dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px
       const b = el("button", { type: "button", class: "bgopt", "data-bg": id, "aria-pressed": String(bg === id), onclick: () => { bg = id; try { localStorage.setItem(BG_KEY, bg); } catch (e) {} applyBg(); renderBgList(); } }, el("i"), el("span", { text: name }));
       box.append(b);
     };
-    box.append(el("span", { class: "bgsec", text: "Новогодние" })); BGS_NY.forEach(add);
-    box.append(el("span", { class: "bgsec", text: "Обычные" })); BGS.forEach(add);
+    if (typeof season === "undefined" || season === "winter") { box.append(el("span", { class: "bgsec", text: "Новогодние" })); BGS_NY.forEach(add); box.append(el("span", { class: "bgsec", text: "Обычные" })); }
+    BGS.forEach(add);
   }
   const bgDlg = document.getElementById("bgDlg");
   document.getElementById("bgBtn").onclick = () => { renderBgList(); bgDlg.showModal(); };
   document.getElementById("bgDone").onclick = () => bgDlg.close();
   bgDlg.addEventListener("click", e => { if (e.target === bgDlg) bgDlg.close(); });
   applyBg();
+
+
+  // ---------- header colour & pet ----------
+  const HEADS = [["auto","Авто",null],["red","Красный","#D63441"],["lilac","Сиреневый","#B9A2F6"],["pink","Розовый","#F28DB0"],["peach","Персиковый","#F6AE7B"],["yellow","Жёлтый","#FFC93C"],["mint","Мятный","#8FD6C2"],["green","Зелёный","#2F9A5E"],["blue","Синий","#3D6FD8"],["choco","Шоколад","#6B4A3A"],["night","Ночь","#2A2F4F"]];
+  const PETS = [["cat","Чёрный кот","pet-cat","#1E1714",""],["ginger","Рыжий кот","pet-cat-light","#F08A3C","#D86A22"],["white","Белый кот","pet-cat-light","#FFFDF8",""],["grey","Серый кот","pet-cat-light","#9AA1AE",""],["corgi","Корги","pet-corgi","",""],["bunny","Зайка","pet-bunny","#FFFDF8",""],["fox","Лиса","pet-fox","",""],["penguin","Пингвин","pet-penguin","",""],["none","Без животного","",""," "]];
+  let headC = "auto", pet = "cat";
+  try { headC = localStorage.getItem("planner-head") || "auto"; pet = localStorage.getItem("planner-pet") || "cat"; } catch (e) {}
+  const lum = hex => { const n = parseInt(hex.slice(1), 16), r = (n >> 16) / 255, g = (n >> 8 & 255) / 255, b = (n & 255) / 255; const f = v => v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); return .2126 * f(r) + .7152 * f(g) + .0722 * f(b); };
+  function applyHead(){
+    const r = document.documentElement, h = HEADS.find(x => x[0] === headC);
+    if (!h || !h[2]) { r.removeAttribute("data-headc"); return; }
+    const light = lum(h[2]) > .42;
+    r.setAttribute("data-headc", headC);
+    r.style.setProperty("--head-user", h[2]);
+    r.style.setProperty("--head-ink-user", light ? "#2A1E1A" : "#FFFDF8");
+    r.style.setProperty("--head-muted-user", light ? "#5A4438" : "rgba(255,253,248,.85)");
+    const tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.content = h[2];
+  }
+  function applyPet(){
+    const p = PETS.find(x => x[0] === pet) || PETS[0];
+    document.querySelectorAll(".hcat, .hcat-d").forEach(sv => { sv.style.display = p[0] === "none" ? "none" : ""; sv.style.color = p[3] || ""; sv.style.setProperty("--pet-stripe", p[4] || "transparent"); });
+    document.querySelectorAll(".petuse").forEach(u => { if (p[2]) u.setAttribute("href", "#" + p[2]); });
+  }
+  function renderLooks(){
+    const hb = document.getElementById("headList"); hb.innerHTML = "";
+    HEADS.forEach(([id, name, col]) => {
+      const b = el("button", { type: "button", class: "sw" + (col ? "" : " auto"), role: "radio", "aria-checked": String(headC === id), "aria-label": name, title: name, onclick: () => { headC = id; try { localStorage.setItem("planner-head", id); } catch (e) {} applyHead(); renderLooks(); } });
+      if (col) b.style.background = col; else b.textContent = "A";
+      hb.append(b);
+    });
+    const pb = document.getElementById("petList"); pb.innerHTML = "";
+    PETS.forEach(([id, name, sym, col, stripe]) => {
+      const b = el("button", { type: "button", class: "petopt", role: "radio", "aria-checked": String(pet === id), "aria-label": name, title: name, onclick: () => { pet = id; try { localStorage.setItem("planner-pet", id); } catch (e) {} applyPet(); renderLooks(); } });
+      if (sym) { const sv = svg('<svg viewBox="0 0 210 120" aria-hidden="true"><use href="#' + sym + '"/></svg>'); sv.style.color = col; sv.style.setProperty("--pet-stripe", stripe || "transparent"); b.append(sv); }
+      else b.append(el("span", { class: "nopet", text: "—" }));
+      b.append(el("small", { text: name }));
+      pb.append(b);
+    });
+  }
+  document.getElementById("bgBtn").addEventListener("click", renderLooks);
+  applyHead(); applyPet();
 
   // ---------- season ----------
   const SEASON_KEY = "planner-season";
@@ -1027,8 +1153,10 @@ dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px
     document.querySelectorAll(".hflower use, .hstar use").forEach(u => u.setAttribute("href", w ? "#ill-snow" : (u.closest(".hstar.s2") ? "#ill-heart" : u.closest(".hstar") ? "#ill-star" : "#ill-flower")));
     document.querySelectorAll("#seasonSeg button").forEach(b => b.setAttribute("aria-checked", String(b.dataset.season === season)));
     const tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.content = w ? "#D63441" : "#B9A2F6";
+    if (typeof applyHead === "function") applyHead();
   }
   document.querySelectorAll("#seasonSeg button").forEach(b => b.onclick = () => { season = b.dataset.season; if (season === "winter" && bg === "paper") { bg = "ny-snow"; } else if (season !== "winter" && bg.startsWith("ny-")) { bg = "paper"; } try { localStorage.setItem(BG_KEY, bg); } catch (e) {} applyBg(); renderBgList(); try { localStorage.setItem(SEASON_KEY, season); } catch (e) {} applySeason(); render(); });
+  if (season !== "winter" && bg.startsWith("ny-")) { bg = "paper"; try { localStorage.setItem(BG_KEY, bg); } catch (e) {} applyBg(); }
   applySeason();
 
   // ---------- storage (Firebase) ----------
@@ -1671,7 +1799,7 @@ dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px
     root.append(renderStrip());
     const all = itemsOn(selected);
     const allDayEv = all.filter(t => isEv(t) && !t.time);
-    const loose = all.filter(t => isTask(t) && !t.time && !isLinkedHere(t, all)).sort(sortT);
+    const loose = all.filter(t => isTask(t) && !t.time).sort(sortT);
     if (allDayEv.length || loose.length) {
       root.append(sectionTitle("В течение дня"));
       root.append(el("div", { class: "loose" }, allDayEv.map(e => eventBox(e, linkedTo(e, all).sort(sortT).map(t => card(t, { outline: true })))), loose.map(t => card(t, { outline: true }))));
@@ -1840,7 +1968,7 @@ dialog{background:var(--surface);border:2.5px solid var(--stroke);box-shadow:5px
       head.append(el("button", { class: "h" + (k === tk ? " today" : ""), "aria-label": "Открыть " + d.getDate() + " " + MF[d.getMonth()], onclick: () => { selected = k; view = "day"; render(); } },
         el("span", { text: DW[i] }), el("b", { text: d.getDate() })));
 
-      const loose = byDay[k].filter(t => !t.time && !isLinkedHere(t, byDay[k])).sort(sortT);
+      const loose = byDay[k].filter(t => !t.time).sort(sortT);
       const cell = el("div", { class: "cell", "data-k": k });
       loose.sort((a, b) => isEv(b) - isEv(a));
       loose.slice(0, 2).forEach(t => {
